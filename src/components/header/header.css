@@ -70,7 +70,8 @@
 }
 
 .header__pop-user-set {
-  display: none;
+  display: block;
+  /*changed display view 18.03*/
   position: absolute;
   top: 61px;
   right: 0;
