@@ -1,5 +1,5 @@
 import React from "react";
-import "./card.css";
+import { SCard } from "./card.styled";
 
 const Card = ({ id, theme, title, date, status }) => {
   let themeColor = "";
@@ -12,7 +12,7 @@ const Card = ({ id, theme, title, date, status }) => {
     themeColor = "green";
   }
   return (
-    <div className="cards__item">
+    <SCard className="cards__item">
       <div className="cards__card card">
         <div className="card__group">
           <div className={`card__theme _${themeColor}`}>
@@ -63,7 +63,7 @@ const Card = ({ id, theme, title, date, status }) => {
           </div>
         </div>
       </div>
-    </div>
+    </SCard>
   );
 };
 export { Card };

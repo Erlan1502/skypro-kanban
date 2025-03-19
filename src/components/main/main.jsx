@@ -1,29 +1,27 @@
 import React from "react";
-import {
-  ColumnWOStatus,
-  ColumnNeedToBeDone,
-  ColumnInWork,
-  ColumnTesting,
-  ColumnReady,
-} from "../column/column.jsx";
-import "./main.css";
+import { Column } from "../column/column.jsx";
+import { SMain } from "./main.styled.js";
 
 const Main = () => {
   return (
-    <main className="main">
+    <SMain className="main">
       <div className="container">
         <div className="main__block">
           <div className="main__content">
-            <ColumnWOStatus title="Без статуса" />
-            <ColumnNeedToBeDone title="Нужно сделать" />
-            <ColumnInWork title="В работе" />
-            <ColumnTesting title="Тестирование" />
-            <ColumnReady title="Готово" />
+            <Column status={toUpperCase("Без Статуса")} />
+            <Column status={toUpperCase("Нужно сделать")} />
+            <Column status={toUpperCase("В работе")} />
+            <Column status={toUpperCase("Тестирование")} />
+            <Column status={toUpperCase("Готово")} />
           </div>
         </div>
       </div>
-    </main>
+    </SMain>
   );
 };
 
 export default Main;
+
+const toUpperCase = (statusLower) => {
+  return statusLower.toUpperCase();
+};
