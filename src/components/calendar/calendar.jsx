@@ -1,9 +1,9 @@
 import React from "react";
-import "./calendar.css";
+import { SCalendar } from "./calendar.styled";
 
 const Calendar = () => {
   return (
-    <div className="calendar">
+    <SCalendar className="calendar">
       <p className="calendar__ttl subttl">Даты</p>
       <div className="calendar__block">
         <div className="calendar__nav">
@@ -89,7 +89,7 @@ const Calendar = () => {
           </p>
         </div>
       </div>
-    </div>
+    </SCalendar>
   );
 };
 

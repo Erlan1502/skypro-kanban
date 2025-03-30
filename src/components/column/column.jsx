@@ -1,77 +1,39 @@
 import React from "react";
-import { CardWebdesign, CardCopywriting, CardResearch } from "../card/card.jsx";
-import "./column.css";
+import { Card } from "../card/card.jsx";
+import { SColumn } from "./column.styled.js";
+import { cardList } from "../../data.js";
+import { useState, useEffect } from "react";
 
-const ColumnWOStatus = ({ title }) => {
+const Column = ({ status }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const cardsWithoutStatus = cardList.filter((card) => card.status === status);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
   return (
-    <div className="main__column">
+    <SColumn className="main__column">
       <div className="column__title">
-        <p>{title}</p>
+        <p>{status}</p>
       </div>
       <div className="cards">
-        <CardWebdesign />
-        <CardCopywriting />
-        <CardWebdesign />
-        <CardCopywriting />
-        <CardResearch />
+        {isLoading ? (
+          <div className="loading">Данные загружаются...</div>
+        ) : (
+          cardsWithoutStatus.map((card) => (
+            <Card
+              key={card.id}
+              id={card.id}
+              theme={card.theme}
+              date={card.date}
+              status={card.status}
+              title={card.title}
+            />
+          ))
+        )}
       </div>
-    </div>
+    </SColumn>
   );
 };
-const ColumnNeedToBeDone = ({ title }) => {
-  return (
-    <div className="main__column">
-      <div className="column__title">
-        <p>{title}</p>
-      </div>
-      <div className="cards">
-        <CardResearch />
-      </div>
-    </div>
-  );
-};
-const ColumnInWork = ({ title }) => {
-  return (
-    <div className="main__column">
-      <div className="column__title">
-        <p>{title}</p>
-      </div>
-      <div className="cards">
-        <CardResearch />
-        <CardCopywriting />
-        <CardWebdesign />
-      </div>
-    </div>
-  );
-};
-const ColumnTesting = ({ title }) => {
-  return (
-    <div className="main__column">
-      <div className="column__title">
-        <p>{title}</p>
-      </div>
-      <div className="cards">
-        <CardResearch />
-      </div>
-    </div>
-  );
-};
-const ColumnReady = ({ title }) => {
-  return (
-    <div className="main__column">
-      <div className="column__title">
-        <p>{title}</p>
-      </div>
-      <div className="cards card__title_finished">
-        <CardResearch />
-      </div>
-    </div>
-  );
-};
-export {
-  ColumnWOStatus,
-  ColumnNeedToBeDone,
-  ColumnInWork,
-  ColumnTesting,
-  ColumnReady,
-};
+export { Column };
