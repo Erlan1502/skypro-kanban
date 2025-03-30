@@ -1,6 +1,10 @@
 import React from "react";
 import { Card } from "../card/card.jsx";
-import { SColumn } from "./column.styled.js";
+import {
+  SCards,
+  SColumnTitle,
+  SColumnTitleParagraph,
+} from "./column.styled.js";
 import { cardList } from "../../data.js";
 import { useState, useEffect } from "react";
 
@@ -13,13 +17,13 @@ const Column = ({ status }) => {
     }, 2000);
   }, []);
   return (
-    <SColumn className="main__column">
-      <div className="column__title">
+    <SColumnTitle>
+      <SColumnTitleParagraph>
         <p>{status}</p>
-      </div>
-      <div className="cards">
+      </SColumnTitleParagraph>
+      <SCards>
         {isLoading ? (
-          <div className="loading">Данные загружаются...</div>
+          <div>Данные загружаются...</div>
         ) : (
           cardsWithoutStatus.map((card) => (
             <Card
@@ -32,8 +36,8 @@ const Column = ({ status }) => {
             />
           ))
         )}
-      </div>
-    </SColumn>
+      </SCards>
+    </SColumnTitle>
   );
 };
 export { Column };
