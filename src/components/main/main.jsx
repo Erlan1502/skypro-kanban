@@ -5,12 +5,13 @@ import {
   SMainContent,
   SMainFirst,
   SMainColumn,
+  SMainContainer,
 } from "./main.styled.js";
 
 const Main = () => {
   return (
     <SMainFirst>
-      <div className="container">
+      <SMainContainer>
         <SMainBlock>
           <SMainContent>
             <SMainColumn>
@@ -30,7 +31,7 @@ const Main = () => {
             </SMainColumn>
           </SMainContent>
         </SMainBlock>
-      </div>
+      </SMainContainer>
     </SMainFirst>
   );
 };

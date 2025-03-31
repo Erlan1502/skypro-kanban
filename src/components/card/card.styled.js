@@ -1,3 +1,4 @@
+import { keyframes } from "styled-components";
 import styled from "styled-components";
 
 const themeColors = {
@@ -11,7 +12,16 @@ const ThemeText = styled.p`
   font-weight: 600;
   line-height: 10px;
 `;
-
+const cardAnimation = keyframes`
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: auto;
+    opacity: 1;
+  }
+`;
 export const CardWrapper = styled.div`
   width: 100%;
   max-width: 220px;
@@ -23,6 +33,9 @@ export const CardWrapper = styled.div`
   padding: 15px 13px 19px;
   margin-bottom: 20px;
   box-sizing: border-box;
+  animation-name: ${cardAnimation};
+  animation-duration: 500ms;
+  animation-timing-function: linear;
 `;
 
 export const CardGroup = styled.div`

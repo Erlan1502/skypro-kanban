@@ -20,3 +20,9 @@ export const SMainColumn = styled.div`
   margin: 0 auto;
   display: block;
 `;
+export const SMainContainer = styled.div`
+  max-width: 1260px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 30px;
+`;
