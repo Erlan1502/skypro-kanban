@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { SHeader } from "./header.styled";
+import {
+  HeaderWrapper,
+  HeaderContainer,
+  HeaderBlock,
+  Logo,
+  Nav,
+  MainButton,
+  UserButton,
+  Popup,
+} from "./header.styled.js";
 
 const Header = () => {
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
@@ -9,50 +18,47 @@ const Header = () => {
   };
 
   return (
-    <SHeader className="header">
-      <div className="container">
-        <div className="header__block">
-          <div className="header__logo _show _light">
-            <a href="" target="_self">
+    <HeaderWrapper>
+      <HeaderContainer>
+        <HeaderBlock>
+          <Logo>
+            <a href="" target="_self" rel="noopener noreferrer">
               <img src="/logo.png" alt="logo" />
             </a>
-          </div>
-          <div className="header__logo _dark">
-            <a href="" target="_self">
-              <img src="/logo_dark.png" alt="logo" />
-            </a>
-          </div>
-          <nav className="header__nav">
-            <button className="header__btn-main-new _hover01" id="btnMainNew">
+          </Logo>
+          <Nav>
+            <MainButton id="btnMainNew">
               <a href="#popNewCard">Создать новую задачу</a>
-            </button>
-            <a
-              href="#user-set-target"
-              className="header__user _hover02"
-              onClick={togglePopUp}
-            >
+            </MainButton>
+            <UserButton href="#user-set-target" onClick={togglePopUp}>
               Ivan Ivanov
-            </a>
+            </UserButton>
             {isPopUpVisible && (
-              <div
-                className="header__pop-user-set pop-user-set"
-                id="user-set-target"
-              >
-                <p className="pop-user-set__name">Ivan Ivanov</p>
-                <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-                <div className="pop-user-set__theme">
-                  <p>Темная тема</p>
-                  <input type="checkbox" className="checkbox" name="checkbox" />
+              <Popup id="user-set-target">
+                <div
+                  className="header__pop-user-set pop-user-set"
+                  id="user-set-target"
+                >
+                  <p className="pop-user-set__name">Ivan Ivanov</p>
+                  <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
+                  <div className="pop-user-set__theme">
+                    <p>Темная тема</p>
+                    <input
+                      type="checkbox"
+                      className="checkbox"
+                      name="checkbox"
+                    />
+                  </div>
+                  <button type="button" className="_hover03">
+                    <a href="#popExit">Выйти</a>
+                  </button>
                 </div>
-                <button type="button" className="_hover03">
-                  <a href="#popExit">Выйти</a>
-                </button>
-              </div>
+              </Popup>
             )}
-          </nav>
-        </div>
-      </div>
-    </SHeader>
+          </Nav>
+        </HeaderBlock>
+      </HeaderContainer>
+    </HeaderWrapper>
   );
 };
 

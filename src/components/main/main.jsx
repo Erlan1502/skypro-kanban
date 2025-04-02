@@ -1,22 +1,38 @@
 import React from "react";
 import { Column } from "../column/column.jsx";
-import { SMain } from "./main.styled.js";
+import {
+  SMainBlock,
+  SMainContent,
+  SMainFirst,
+  SMainColumn,
+  SMainContainer,
+} from "./main.styled.js";
 
 const Main = () => {
   return (
-    <SMain className="main">
-      <div className="container">
-        <div className="main__block">
-          <div className="main__content">
-            <Column status={toUpperCase("Без Статуса")} />
-            <Column status={toUpperCase("Нужно сделать")} />
-            <Column status={toUpperCase("В работе")} />
-            <Column status={toUpperCase("Тестирование")} />
-            <Column status={toUpperCase("Готово")} />
-          </div>
-        </div>
-      </div>
-    </SMain>
+    <SMainFirst>
+      <SMainContainer>
+        <SMainBlock>
+          <SMainContent>
+            <SMainColumn>
+              <Column status={toUpperCase("Без Статуса")} />
+            </SMainColumn>
+            <SMainColumn>
+              <Column status={toUpperCase("Нужно сделать")} />
+            </SMainColumn>
+            <SMainColumn>
+              <Column status={toUpperCase("В работе")} />
+            </SMainColumn>
+            <SMainColumn>
+              <Column status={toUpperCase("Тестирование")} />
+            </SMainColumn>
+            <SMainColumn>
+              <Column status={toUpperCase("Готово")} />
+            </SMainColumn>
+          </SMainContent>
+        </SMainBlock>
+      </SMainContainer>
+    </SMainFirst>
   );
 };
 
