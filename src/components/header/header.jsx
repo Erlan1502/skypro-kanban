@@ -9,6 +9,7 @@ import {
   UserButton,
   Popup,
 } from "./header.styled.js";
+import PopUser from "../popups/popUser/popUser.jsx";
 
 const Header = () => {
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
@@ -35,24 +36,7 @@ const Header = () => {
             </UserButton>
             {isPopUpVisible && (
               <Popup id="user-set-target">
-                <div
-                  className="header__pop-user-set pop-user-set"
-                  id="user-set-target"
-                >
-                  <p className="pop-user-set__name">Ivan Ivanov</p>
-                  <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-                  <div className="pop-user-set__theme">
-                    <p>Темная тема</p>
-                    <input
-                      type="checkbox"
-                      className="checkbox"
-                      name="checkbox"
-                    />
-                  </div>
-                  <button type="button" className="_hover03">
-                    <a href="#popExit">Выйти</a>
-                  </button>
-                </div>
+                <PopUser />
               </Popup>
             )}
           </Nav>
