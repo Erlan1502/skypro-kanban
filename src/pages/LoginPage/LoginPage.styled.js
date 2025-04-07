@@ -1,7 +1,4 @@
-import React from "react";
-import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
-
 const PageContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -78,6 +75,7 @@ const Button = styled.button`
   margin-top: 13px;
   border-radius: 4px;
   background: rgb(86, 94, 239);
+  border: 1px solid rgb(86, 94, 239);
 `;
 
 const RegisterLink = styled.div`
@@ -100,44 +98,13 @@ const Footer = styled.div`
   font-size: 0.8rem;
   color: #999;
 `;
-
-const LoginPage = ({ isSignUp, setIsAuth }) => {
-  const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsAuth(true);
-    navigate("/");
-  };
-
-  return (
-    <PageContainer>
-      <LoginContainer>
-        <Title>{isSignUp ? "Регистрация" : "Вход"}</Title>
-
-        <LoginForm onSubmit={handleSubmit}>
-          {isSignUp && <Input type="name" placeholder="Имя" />}
-          <Input type="email" placeholder="Эл. почта" />
-          <Input type="password" placeholder="Пароль" />
-
-          <Button type="submit">
-            {isSignUp ? "Зарегистрироваться" : "Войти"}
-          </Button>
-        </LoginForm>
-
-        {!isSignUp && (
-          <RegisterLink>
-            Нужно зарегистрироваться?{" "}
-            <Link to="/register">Регистрируйтесь здесь</Link>
-          </RegisterLink>
-        )}
-        {isSignUp && (
-          <RegisterLink>
-            Уже есть аккаунт? <Link to="/login">Войдите здесь</Link>
-          </RegisterLink>
-        )}
-      </LoginContainer>
-    </PageContainer>
-  );
+export {
+  PageContainer,
+  LoginContainer,
+  Title,
+  LoginForm,
+  Input,
+  Button,
+  RegisterLink,
+  Footer,
 };
-
-export default LoginPage;

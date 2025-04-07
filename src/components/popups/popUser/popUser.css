@@ -1,6 +1,6 @@
 .pop-user-set {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 61px;
   right: 0;
   width: 213px;
@@ -12,6 +12,12 @@
   padding: 34px;
   text-align: center;
   z-index: 2;
+}
+
+@media (min-width: 1201px) {
+  .pop-user-set {
+    right: calc((100% - 1200px) / 2);
+  }
 }
 
 .pop-user-set__name {

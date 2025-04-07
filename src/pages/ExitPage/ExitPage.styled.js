@@ -1,7 +1,4 @@
-import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-
 const ExitOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -58,33 +55,11 @@ const CancelButton = styled(Button)`
   color: #565eef;
   border: 0.7px solid #565eef;
 `;
-
-const ExitPage = ({ setIsAuth }) => {
-  const navigate = useNavigate();
-
-  const handleLogout = (e) => {
-    e.preventDefault();
-    if (typeof setIsAuth === "function") {
-      setIsAuth(false);
-    }
-  };
-
-  const handleCancel = (e) => {
-    e.preventDefault();
-    navigate("/");
-  };
-
-  return (
-    <ExitOverlay>
-      <ExitContainer>
-        <ExitQuestion>Выйти из аккаунта?</ExitQuestion>
-        <ButtonGroup>
-          <ConfirmButton onClick={handleLogout}>Да, выйти</ConfirmButton>
-          <CancelButton onClick={handleCancel}>Нет, остаться</CancelButton>
-        </ButtonGroup>
-      </ExitContainer>
-    </ExitOverlay>
-  );
+export {
+  ExitOverlay,
+  ExitContainer,
+  ExitQuestion,
+  ButtonGroup,
+  ConfirmButton,
+  CancelButton,
 };
-
-export default ExitPage;

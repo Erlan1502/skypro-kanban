@@ -1,14 +1,14 @@
 import React from "react";
-import { Column } from "../components/column/column.jsx";
+import { Column } from "../../components/column/column.jsx";
 import {
   SMainFirst,
   SMainContainer,
   SMainBlock,
   SMainContent,
   SMainColumn,
-} from "../components/main/main.styled.js";
+} from "./HomePage.styled.js";
 import { Outlet } from "react-router-dom";
-import Header from "../components/header/header.jsx";
+import Header from "../../components/header/header.jsx";
 
 const toUpperCase = (statusLower) => {
   return statusLower.toUpperCase();

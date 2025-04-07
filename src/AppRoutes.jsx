@@ -5,12 +5,12 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useState } from "react";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import CardPage from "./pages/CardPage";
-import NewCardPage from "./pages/NewCardPage";
-import ExitPage from "./pages/ExitPage";
-import NotFoundPage from "./pages/NotFoundPage";
+import HomePage from "./pages/HomePage/HomePage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import CardPage from "./pages/CardPage/CardPage";
+import NewCardPage from "./pages/NewCardPage/NewCardPage";
+import ExitPage from "./pages/ExitPage/ExitPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.jsx";
 import { PrivateRoute } from "./components/privateRoute";
 
 const AppRoutes = () => {
