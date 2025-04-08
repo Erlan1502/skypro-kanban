@@ -7,7 +7,6 @@ import {
   Nav,
   MainButton,
   UserButton,
-  Popup,
 } from "./header.styled.js";
 import PopUser from "../popups/popUser/popUser.jsx";
 
@@ -31,14 +30,8 @@ const Header = () => {
             <MainButton id="btnMainNew">
               <a href="#popNewCard">Создать новую задачу</a>
             </MainButton>
-            <UserButton href="#user-set-target" onClick={togglePopUp}>
-              Ivan Ivanov
-            </UserButton>
-            {isPopUpVisible && (
-              <Popup id="user-set-target">
-                <PopUser />
-              </Popup>
-            )}
+            <UserButton onClick={togglePopUp}>Ivan Ivanov</UserButton>
+            <PopUser $isVisible={isPopUpVisible} />
           </Nav>
         </HeaderBlock>
       </HeaderContainer>

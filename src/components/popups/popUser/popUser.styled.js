@@ -1,5 +1,6 @@
-.pop-user-set {
-  display: none;
+import styled from "styled-components";
+
+export const PopUserContainer = styled.div`
   position: fixed;
   top: 61px;
   right: 0;
@@ -12,46 +13,44 @@
   padding: 34px;
   text-align: center;
   z-index: 2;
-}
-
-@media (min-width: 1201px) {
-  .pop-user-set {
+  display: ${(props) => (props.$isVisible ? "block" : "none")};
+  @media (min-width: 1201px) {
     right: calc((100% - 1200px) / 2);
   }
-}
+`;
 
-.pop-user-set__name {
+export const Name = styled.p`
   color: #000;
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
   letter-spacing: -0.14px;
   margin-bottom: 4px;
-}
+`;
 
-.pop-user-set__mail {
+export const Email = styled.p`
   color: #94a6be;
   font-size: 14px;
   line-height: 21px;
   letter-spacing: -0.14px;
   margin-bottom: 10px;
-}
+`;
 
-.pop-user-set__theme {
+export const ThemeContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 30px;
-}
+`;
 
-.pop-user-set__theme p {
+export const ThemeText = styled.p`
   color: #000;
   font-size: 14px;
   line-height: 21px;
   letter-spacing: -0.14px;
-}
+`;
 
-.pop-user-set__theme input[type="checkbox"] {
+export const Checkbox = styled.input.attrs({ type: "checkbox" })`
   position: relative;
   width: 24px;
   height: 13px;
@@ -61,33 +60,34 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-}
 
-.pop-user-set__theme input[type="checkbox"]::before {
-  content: "";
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background-color: #94a6be;
-  transition: 0.5s;
-}
+  &::before {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background-color: #94a6be;
+    transition: 0.5s;
+  }
 
-.pop-user-set__theme input:checked[type="checkbox"]::before {
-  left: 12px;
-}
+  &:checked::before {
+    left: 12px;
+  }
+`;
 
-.pop-user-set button {
+export const LogoutButton = styled.button`
   width: 72px;
   height: 30px;
   background: transparent;
   color: #565eef;
   border-radius: 4px;
   border: 1px solid #565eef;
-}
+  cursor: pointer;
 
-.pop-user-set button a {
-  color: #565eef;
-}
+  &:hover {
+    background-color: #f5f5f5;
+  }
+`;

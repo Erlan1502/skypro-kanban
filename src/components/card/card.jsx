@@ -8,6 +8,7 @@ import {
   CardContent,
   CardDate,
 } from "./card.styled.js";
+import { Link } from "react-router-dom";
 
 const Card = ({ id, theme, title, date, status }) => {
   let themeColor = "";
@@ -25,18 +26,18 @@ const Card = ({ id, theme, title, date, status }) => {
         <CardTheme $color={themeColor}>
           <p>{theme}</p>
         </CardTheme>
-        <a href="#popBrowse" target="_self" rel="noopener noreferrer">
+        <Link to={`/card/${id}`} target="_self" rel="noopener noreferrer">
           <CardButton>
             <div></div>
             <div></div>
             <div></div>
           </CardButton>
-        </a>
+        </Link>
       </CardGroup>
       <CardContent>
-        <a href="" target="_blank" rel="noopener noreferrer">
+        <Link to={`/card/${id}`} target="_self" rel="noopener noreferrer">
           <CardTitle>{title}</CardTitle>
-        </a>
+        </Link>
         <CardDate>
           <svg
             xmlns="http://www.w3.org/2000/svg"

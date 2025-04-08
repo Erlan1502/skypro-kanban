@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "./components/header/header.jsx";
 import PopBrowse from "./components/popups/popBrowse/popBrowse.jsx";
 import PopNewCard from "./components/popups/popNewCard/popNewCard.jsx";
 import PopUser from "./components/popups/popUser/popUser.jsx";
@@ -13,9 +12,7 @@ const App = () => {
     <>
       <GlobalStyles />
       <AppWrapper>
-        <PopBrowse />
         <PopNewCard />
-        <PopUser />
         <AppRoutes />
       </AppWrapper>
     </>
