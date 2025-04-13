@@ -1,19 +1,33 @@
 import React from "react";
-import "./popUser.css";
+import { useNavigate } from "react-router-dom";
+import {
+  PopUserContainer,
+  Name,
+  Email,
+  ThemeContainer,
+  ThemeText,
+  Checkbox,
+  LogoutButton,
+} from "./popUser.styled.js";
 
-const PopUser = () => {
+const PopUser = ({ $isVisible }) => {
+  const navigate = useNavigate();
+
+  const handleLogoutClick = (e) => {
+    e.preventDefault();
+    navigate("/exit");
+  };
+
   return (
-    <div className="pop-user-set" id="user-set-target">
-      <p className="pop-user-set__name">Ivan Ivanov</p>
-      <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-      <div className="pop-user-set__theme">
-        <p>Темная тема</p>
-        <input type="checkbox" className="checkbox" name="checkbox" />
-      </div>
-      <button type="button" className="_hover03">
-        <a href="#popExit">Выйти</a>
-      </button>
-    </div>
+    <PopUserContainer $isVisible={$isVisible}>
+      <Name>Ivan Ivanov</Name>
+      <Email>ivan.ivanov@gmail.com</Email>
+      <ThemeContainer>
+        <ThemeText>Темная тема</ThemeText>
+        <Checkbox name="checkbox" />
+      </ThemeContainer>
+      <LogoutButton onClick={handleLogoutClick}>Выйти</LogoutButton>
+    </PopUserContainer>
   );
 };
 
