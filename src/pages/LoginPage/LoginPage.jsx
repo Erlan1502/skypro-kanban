@@ -57,13 +57,6 @@ const LoginPage = ({ isSignUp, setIsAuth }) => {
       );
       isValid = false;
     }
-    if (!isSignUp && !formData.name.trim()) {
-      newErrors.name = true;
-      setError(
-        "Введенные вами данные не распознаны. Проверьте свой логин и пароль и повторите попытку входа."
-      );
-      isValid = false;
-    }
 
     if (!isSignUp && !formData.login.trim()) {
       newErrors.login = true;

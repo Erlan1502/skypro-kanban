@@ -13,6 +13,8 @@ import PopUser from "../popups/popUser/popUser.jsx";
 const Header = () => {
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
 
+  const userData = JSON.parse(localStorage.getItem("userInfo")) || {};
+  const { name } = userData;
   const togglePopUp = () => {
     setIsPopUpVisible(!isPopUpVisible);
   };
@@ -30,7 +32,7 @@ const Header = () => {
             <MainButton id="btnMainNew">
               <a href="#popNewCard">Создать новую задачу</a>
             </MainButton>
-            <UserButton onClick={togglePopUp}>Ivan Ivanov</UserButton>
+            <UserButton onClick={togglePopUp}>{`${name}`}</UserButton>
             <PopUser $isVisible={isPopUpVisible} />
           </Nav>
         </HeaderBlock>

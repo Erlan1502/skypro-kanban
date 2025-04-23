@@ -5,17 +5,30 @@ import {
   SColumnTitle,
   SColumnTitleParagraph,
 } from "./column.styled.js";
-import { cardList } from "../../data.js";
 import { useState, useEffect } from "react";
+import { getTasks } from "../../services/tasks.js";
 
 const Column = ({ status }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const cardsWithoutStatus = cardList.filter((card) => card.status === status);
+  const [cards, setCards] = useState([]);
+
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, []);
+    const fetchTasks = async () => {
+      try {
+        const tasks = await getTasks();
+        const filteredCards = tasks.filter((card) => card.status === status);
+        setCards(filteredCards);
+        setIsLoading(false);
+        console.log("Tasks fetched");
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchTasks();
+  }, [status]);
+
   return (
     <SColumnTitle>
       <SColumnTitleParagraph>
@@ -25,7 +38,7 @@ const Column = ({ status }) => {
         {isLoading ? (
           <div>Данные загружаются...</div>
         ) : (
-          cardsWithoutStatus.map((card) => (
+          cards.map((card) => (
             <Card
               key={card.id}
               id={card.id}
@@ -40,4 +53,5 @@ const Column = ({ status }) => {
     </SColumnTitle>
   );
 };
+
 export { Column };
