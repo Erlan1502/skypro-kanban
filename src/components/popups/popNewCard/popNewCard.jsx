@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./popNewCard.css";
 import { createTask } from "../../../services/tasks";
-const PopNewCard = ({ onTaskCreated }) => {
+const PopNewCard = ({ onTaskCreated, onClose }) => {
   const [formData, setFormData] = useState({
     title: "Новая задача",
     description: "",
@@ -33,14 +33,14 @@ const PopNewCard = ({ onTaskCreated }) => {
     try {
       const newTask = await createTask({
         title: formData.title,
-        text: formData.description,
+        description: formData.description,
         date: formData.date,
-        theme: formData.theme,
+        topic: formData.theme,
         status: formData.status,
       });
 
       console.log("Task created:", newTask);
-      if (onTaskCreated) onTaskCreated(); // обновление
+      if (onTaskCreated) onTaskCreated(newTask); // обновление
       setFormData({
         title: "Новая задача",
         description: "",
@@ -60,7 +60,7 @@ const PopNewCard = ({ onTaskCreated }) => {
         <div className="pop-new-card__block">
           <div className="pop-new-card__content">
             <h3 className="pop-new-card__ttl">Создание задачи</h3>
-            <a href="#" className="pop-new-card__close">
+            <a href="#" className="pop-new-card__close" onClick={onClose}>
               &#10006;
             </a>
             <div className="pop-new-card__wrap">

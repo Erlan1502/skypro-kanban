@@ -1,13 +1,7 @@
 import React from "react";
 import "./popBrowse.css";
-import { useNavigate, useParams } from "react-router-dom";
 
-const PopBrowse = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const handleClose = () => {
-    navigate("/");
-  };
+const PopBrowse = ({ id, onClose }) => {
   return (
     <div className="pop-browse-overlay">
       <div className="pop-browse__container">
@@ -176,28 +170,9 @@ const PopBrowse = () => {
                   <a href="#">Удалить задачу</a>
                 </button>
               </div>
-              <button className="btn-browse__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
-              </button>
-            </div>
-            <div className="pop-browse__btn-edit _hide">
-              <div className="btn-group">
-                <button className="btn-edit__edit _btn-bg _hover01">
-                  <a href="#">Сохранить</a>
-                </button>
-                <button className="btn-edit__edit _btn-bor _hover03">
-                  <a href="#">Отменить</a>
-                </button>
-                <button
-                  className="btn-edit__delete _btn-bor _hover03"
-                  id="btnDelete"
-                >
-                  <a href="#">Удалить задачу</a>
-                </button>
-              </div>
               <button
-                className="btn-edit__close _btn-bg _hover01"
-                onClick={handleClose()}
+                onClick={onClose}
+                className="btn-browse__close _btn-bg _hover01"
               >
                 Закрыть
               </button>

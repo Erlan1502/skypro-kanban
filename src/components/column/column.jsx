@@ -5,30 +5,8 @@ import {
   SColumnTitle,
   SColumnTitleParagraph,
 } from "./column.styled.js";
-import { useState, useEffect } from "react";
-import { getTasks } from "../../services/tasks.js";
 
-const Column = ({ status }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const tasks = await getTasks();
-        const filteredCards = tasks.filter((card) => card.status === status);
-        setCards(filteredCards);
-        setIsLoading(false);
-        console.log("Tasks fetched");
-      } catch (error) {
-        console.error("Error fetching tasks:", error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchTasks();
-  }, [status]);
-
+const Column = ({ status, isLoading, tasks }) => {
   return (
     <SColumnTitle>
       <SColumnTitleParagraph>
@@ -38,16 +16,18 @@ const Column = ({ status }) => {
         {isLoading ? (
           <div>Данные загружаются...</div>
         ) : (
-          cards.map((card) => (
-            <Card
-              key={card.id}
-              id={card.id}
-              theme={card.theme}
-              date={card.date}
-              status={card.status}
-              title={card.title}
-            />
-          ))
+          tasks.map((card) => {
+            return (
+              <Card
+                key={card._id}
+                id={card._id}
+                theme={card.topic}
+                date={card.date}
+                status={card.status}
+                title={card.title}
+              />
+            );
+          })
         )}
       </SCards>
     </SColumnTitle>

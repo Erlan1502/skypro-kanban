@@ -29,8 +29,6 @@ const AppRoutes = () => {
       <Route path="*" element={<NotFoundPage />} />
       <Route element={<PrivateRoute isAuth={isAuth} />}>
         <Route path="/" element={<HomePage />}>
-          <Route path="/card/:id" element={<PopBrowse />} />
-          <Route path="/new-card" element={<PopNewCard />} />
           <Route path="/exit" element={<ExitPage setIsAuth={setIsAuth} />} />
         </Route>
       </Route>

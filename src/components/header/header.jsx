@@ -10,14 +10,10 @@ import {
 } from "./header.styled.js";
 import PopUser from "../popups/popUser/popUser.jsx";
 
-const Header = () => {
+const Header = ({ onAddTask }) => {
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
-
   const userData = JSON.parse(localStorage.getItem("userInfo")) || {};
   const { name } = userData;
-  const togglePopUp = () => {
-    setIsPopUpVisible(!isPopUpVisible);
-  };
 
   return (
     <HeaderWrapper>
@@ -29,10 +25,10 @@ const Header = () => {
             </a>
           </Logo>
           <Nav>
-            <MainButton id="btnMainNew">
-              <a href="#popNewCard">Создать новую задачу</a>
-            </MainButton>
-            <UserButton onClick={togglePopUp}>{`${name}`}</UserButton>
+            <MainButton onClick={onAddTask}>Создать новую задачу</MainButton>
+            <UserButton onClick={() => setIsPopUpVisible(!isPopUpVisible)}>
+              {name}
+            </UserButton>
             <PopUser $isVisible={isPopUpVisible} />
           </Nav>
         </HeaderBlock>
