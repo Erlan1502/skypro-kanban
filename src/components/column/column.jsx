@@ -6,7 +6,7 @@ import {
   SColumnTitleParagraph,
 } from "./column.styled.js";
 
-const Column = ({ status, isLoading, tasks }) => {
+const Column = ({ status, isLoading, tasks, onTaskDeleted, onTaskUpdated }) => {
   return (
     <SColumnTitle>
       <SColumnTitleParagraph>
@@ -25,6 +25,8 @@ const Column = ({ status, isLoading, tasks }) => {
                 date={card.date}
                 status={card.status}
                 title={card.title}
+                onTaskDeleted={onTaskDeleted} //проброс в кардс
+                onTaskUpdated={onTaskUpdated} //проброс в кардс
               />
             );
           })

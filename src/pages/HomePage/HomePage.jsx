@@ -47,7 +47,15 @@ const HomePage = ({ setIsAuth }) => {
       console.error("Ошибка создания задачи:", error);
     }
   };
-  console.log(tasks);
+  const handleTaskDeleted = (deletedTaskId) => {
+    setTasks(tasks.filter((task) => task._id !== deletedTaskId));
+    console.log(tasks);
+  };
+  const handleTaskUpdated = (updatedTask) => {
+    setTasks(
+      tasks.map((task) => (task._id === updatedTask._id ? updatedTask : task))
+    );
+  };
   return (
     <>
       <Header
@@ -65,6 +73,8 @@ const HomePage = ({ setIsAuth }) => {
                     status={status}
                     tasks={tasks.filter((task) => task.status === status)}
                     isLoading={isLoading}
+                    onTaskDeleted={handleTaskDeleted}
+                    onTaskUpdated={handleTaskUpdated}
                   />
                 </SMainColumn>
               ))}

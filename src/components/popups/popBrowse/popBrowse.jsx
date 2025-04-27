@@ -1,37 +1,163 @@
-import React from "react";
+import React, { useState } from "react";
 import "./popBrowse.css";
+import styled from "styled-components";
+import { updateTask } from "../../../services/tasks";
 
-const PopBrowse = ({ id, onClose }) => {
+const themeColors = {
+  orange: "#FFE4C2",
+  purple: "#E9D4FF",
+  green: "#B4FDD1",
+};
+
+const StyledCardTheme = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  padding: 8px 20px 8px 20px;
+  border-radius: 24px;
+  background-color: ${({ $color }) => themeColors[$color] || "#EEE"};
+  p {
+    color: ${({ $color }) =>
+      $color === "orange"
+        ? "#FF6D00"
+        : $color === "purple"
+        ? "#9A48F1"
+        : "#06B16E"};
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 10px;
+  }
+`;
+
+const PopBrowse = ({
+  id,
+  theme,
+  title,
+  status,
+  onClose,
+  onDelete,
+  onTaskUpdate,
+  description,
+  date,
+}) => {
+  const [isOnChange, setIsOnChange] = useState(false);
+  let themeColor = "";
+  if (theme === "Web Design") {
+    themeColor = "orange";
+  } else if (theme === "Copywriting") {
+    themeColor = "purple";
+  } else if (theme === "Research") {
+    themeColor = "green";
+  }
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    title: title,
+    description: description,
+    date: date,
+    theme: theme,
+    status: status,
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  const handleStatusChange = (status) => {
+    setFormData((prev) => ({
+      ...prev,
+      status,
+    }));
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    try {
+      const updatedTask = await updateTask(id, {
+        title: formData.title,
+        description: formData.description,
+        date: formData.date,
+        topic: formData.theme,
+        status: formData.status,
+      });
+      console.log("Задача обновлена:", updatedTask); //проверка
+
+      if (onTaskUpdate) onTaskUpdate(updatedTask);
+      onClose();
+    } catch (error) {
+      console.error("Error updating task:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="pop-browse-overlay">
       <div className="pop-browse__container">
         <div className="pop-browse__block">
           <div className="pop-browse__content">
             <div className="pop-browse__top-block">
-              <h3 className="pop-browse__ttl">id = {id}</h3>
-              <div className="categories__theme theme-top _orange _active-category">
-                <p className="_orange">Тема</p>
-              </div>
+              <h3 className="pop-browse__ttl">{title}</h3>
+              <StyledCardTheme $color={themeColor}>
+                <p>{theme}</p>
+              </StyledCardTheme>
             </div>
             <div className="pop-browse__status status">
               <p className="status__p subttl">Статус</p>
-              <div className="status__themes">
-                <div className="status__theme _hide">
-                  <p>Без статуса</p>
+              {isOnChange && (
+                <div className="status__themes">
+                  <div
+                    className="status__theme"
+                    onClick={() => {
+                      handleStatusChange("Без статуса");
+                    }}
+                  >
+                    <p className="_gray">Без статуса</p>
+                  </div>
+                  <div
+                    className="status__theme"
+                    onClick={() => {
+                      handleStatusChange("Нужно сделать");
+                    }}
+                  >
+                    <p className="_gray">Нужно сделать</p>
+                  </div>
+                  <div
+                    className="status__theme"
+                    onClick={() => {
+                      handleStatusChange("В работе");
+                    }}
+                  >
+                    <p className="_gray">В работе</p>
+                  </div>
+                  <div
+                    className="status__theme"
+                    onClick={() => {
+                      handleStatusChange("Тестирование");
+                    }}
+                  >
+                    <p className="_gray">Тестирование</p>
+                  </div>
+                  <div
+                    className="status__theme"
+                    onClick={() => {
+                      handleStatusChange("Готово");
+                    }}
+                  >
+                    <p className="_gray">Готово</p>
+                  </div>
                 </div>
-                <div className="status__theme _gray">
-                  <p className="_gray">Нужно сделать</p>
+              )}
+              {!isOnChange && (
+                <div className="status__themes">
+                  <div className="status__theme _gray">
+                    <p className="_gray">{status}</p>
+                  </div>
                 </div>
-                <div className="status__theme _hide">
-                  <p>В работе</p>
-                </div>
-                <div className="status__theme _hide">
-                  <p>Тестирование</p>
-                </div>
-                <div className="status__theme _hide">
-                  <p>Готово</p>
-                </div>
-              </div>
+              )}
             </div>
             <div className="pop-browse__wrap">
               <form
@@ -43,13 +169,28 @@ const PopBrowse = ({ id, onClose }) => {
                   <label htmlFor="textArea01" className="subttl">
                     Описание задачи
                   </label>
-                  <textarea
-                    className="form-browse__area"
-                    name="text"
-                    id="textArea01"
-                    readOnly
-                    placeholder="Введите описание задачи..."
-                  ></textarea>
+                  {!isOnChange && (
+                    <textarea
+                      className="form-browse__area"
+                      name="text"
+                      id="textArea01"
+                      readOnly
+                      placeholder="Введите описание задачи..."
+                    >
+                      {description}
+                    </textarea>
+                  )}
+                  {isOnChange && (
+                    <textarea
+                      className="white form-browse__area"
+                      name="text"
+                      id="textArea01"
+                      placeholder="Введите описание задачи..."
+                      onChange={handleChange}
+                    >
+                      {description}
+                    </textarea>
+                  )}
                 </div>
               </form>
               <div className="pop-new-card__calendar calendar">
@@ -163,10 +304,36 @@ const PopBrowse = ({ id, onClose }) => {
             </div>
             <div className="pop-browse__btn-browse ">
               <div className="btn-group">
-                <button className="btn-browse__edit _btn-bor _hover03">
-                  <a href="#">Редактировать задачу</a>
-                </button>
-                <button className="btn-browse__delete _btn-bor _hover03">
+                {!isOnChange && (
+                  <button
+                    className="btn-browse__edit _btn-bor _hover03"
+                    onClick={() => {
+                      setIsOnChange(true);
+                    }}
+                  >
+                    <a href="#">Редактировать задачу</a>
+                  </button>
+                )}
+                {isOnChange && (
+                  <button
+                    onClick={handleSubmit}
+                    className="btn-browse__close _btn-bg _hover01"
+                  >
+                    Сохранить
+                  </button>
+                )}
+                {isOnChange && (
+                  <button
+                    className="btn-browse__delete _btn-bor _hover03"
+                    onClick={() => setIsOnChange(false)}
+                  >
+                    <a href="#">Отменить</a>
+                  </button>
+                )}
+                <button
+                  className="btn-browse__delete _btn-bor _hover03"
+                  onClick={() => onDelete(id)}
+                >
                   <a href="#">Удалить задачу</a>
                 </button>
               </div>

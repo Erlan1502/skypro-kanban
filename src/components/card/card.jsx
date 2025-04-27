@@ -10,18 +10,44 @@ import {
 } from "./card.styled.js";
 import { Link } from "react-router-dom";
 import PopBrowse from "../popups/popBrowse/popBrowse.jsx";
+import { deleteTask } from "../../services/tasks.js";
 
-const Card = ({ id, theme, title, date, status }) => {
+const Card = ({
+  id,
+  theme,
+  title,
+  date,
+  status,
+  onTaskDeleted,
+  onTaskUpdated,
+}) => {
   let themeColor = "";
 
   if (theme === "Web Design") {
     themeColor = "orange";
-  } else if (theme === "CopyWriting") {
+  } else if (theme === "Copywriting") {
     themeColor = "purple";
   } else if (theme === "Research") {
     themeColor = "green";
   }
   const [showCard, setShowCard] = useState(false);
+  const handleDelete = async () => {
+    try {
+      await deleteTask(id);
+      if (typeof onTaskDeleted === "function") {
+        onTaskDeleted(id);
+      }
+      setShowCard(false);
+    } catch (error) {
+      console.error("Ошибка:", error);
+    }
+  };
+  const handleChange = async (updatedTask) => {
+    if (typeof onTaskUpdated === "function") {
+      onTaskUpdated(updatedTask);
+    }
+    setShowCard(false);
+  };
   return (
     <>
       <CardWrapper>
@@ -72,7 +98,17 @@ const Card = ({ id, theme, title, date, status }) => {
           </CardDate>
         </CardContent>
       </CardWrapper>
-      {showCard && <PopBrowse id={id} onClose={() => setShowCard(false)} />}
+      {showCard && (
+        <PopBrowse
+          theme={theme}
+          title={title}
+          status={status}
+          id={id}
+          onClose={() => setShowCard(false)}
+          onDelete={handleDelete}
+          onTaskUpdate={handleChange}
+        />
+      )}
     </>
   );
 };

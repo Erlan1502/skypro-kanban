@@ -33,7 +33,7 @@ export async function getTaskById(id) {
 export async function createTask(taskData) {
   try {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    const token = userInfo?.token;
+    const token = userInfo.token;
 
     const response = await axios.post(API_URL + "/kanban", taskData, {
       headers: {
@@ -49,9 +49,12 @@ export async function createTask(taskData) {
 }
 export async function updateTask(id, updatedData) {
   try {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const token = userInfo?.token;
     const response = await axios.put(`${API_URL}/kanban/${id}`, updatedData, {
       headers: {
         "Content-Type": "",
+        Authorization: `Bearer ${token}`,
       },
     });
     return response.data.tasks;
@@ -62,9 +65,22 @@ export async function updateTask(id, updatedData) {
 
 export async function deleteTask(id) {
   try {
-    const response = await axios.delete(`${API_URL}/kanban/${id}`);
-    return response.data.tasks;
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const token = userInfo?.token;
+
+    if (!token) {
+      throw new Error("Токен авторизации отсутствует");
+    }
+
+    const response = await axios.delete(`${API_URL}/kanban/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data; // Возвращаем обновленные данные
   } catch (error) {
-    throw new Error(error.response.data.error);
+    throw new Error(
+      error.response?.data?.error || "Ошибка при удалении задачи"
+    );
   }
 }

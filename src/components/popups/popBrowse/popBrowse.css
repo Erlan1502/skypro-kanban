@@ -112,6 +112,9 @@
   margin-top: 14px;
   height: 200px;
 }
+.white {
+  background-color: white;
+}
 
 .form-browse__area::-moz-placeholder {
   font-weight: 400;
