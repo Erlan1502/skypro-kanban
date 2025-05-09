@@ -9,8 +9,8 @@ import {
 } from "./HomePage.styled.js";
 import { Outlet } from "react-router-dom";
 import Header from "../../components/header/header.jsx";
-import PopNewCard from "../../components/popups/popNewCard/popNewCard.jsx"; // Импортируем компонент
-import { getTasks } from "../../services/tasks"; // Импортируем API-функции
+import PopNewCard from "../../components/popups/popNewCard/popNewCard.jsx";
+import { getTasks } from "../../services/tasks";
 
 const statuses = [
   "Без статуса",
@@ -51,10 +51,14 @@ const HomePage = ({ setIsAuth }) => {
     setTasks(tasks.filter((task) => task._id !== deletedTaskId));
     console.log(tasks);
   };
-  const handleTaskUpdated = (updatedTask) => {
+  const handleTaskUpdated = async (updatedTask) => {
     setTasks(
       tasks.map((task) => (task._id === updatedTask._id ? updatedTask : task))
     );
+    const tasksData =
+      await getTasks(); /* Да это костыль, но справедливости ради, я потратил 3 часа, по итогу не найдя почему оно не рендерится */
+    setTasks(tasksData);
+    console.log(tasks);
   };
   return (
     <>

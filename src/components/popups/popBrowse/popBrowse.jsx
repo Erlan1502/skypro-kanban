@@ -89,7 +89,7 @@ const PopBrowse = ({
       if (onTaskUpdate) onTaskUpdate(updatedTask);
       onClose();
     } catch (error) {
-      console.error("Error updating task:", error);
+      console.error("Ошибка при обновлении задачи:", error);
     } finally {
       setIsSubmitting(false);
     }
