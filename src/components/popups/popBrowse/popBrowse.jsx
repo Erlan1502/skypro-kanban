@@ -66,11 +66,13 @@ const PopBrowse = ({
       [name]: value,
     }));
   };
+  const [activeStatus, setActiveStatus] = useState(status);
   const handleStatusChange = (status) => {
     setFormData((prev) => ({
       ...prev,
       status,
     }));
+    setActiveStatus(status);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -110,44 +112,60 @@ const PopBrowse = ({
               {isOnChange && (
                 <div className="status__themes">
                   <div
-                    className="status__theme"
+                    className={`status__theme ${
+                      activeStatus === "Без статуса"
+                        ? "status__theme--active"
+                        : ""
+                    }`}
                     onClick={() => {
                       handleStatusChange("Без статуса");
                     }}
                   >
-                    <p className="_gray">Без статуса</p>
+                    <p>Без статуса</p>
                   </div>
                   <div
-                    className="status__theme"
+                    className={`status__theme ${
+                      activeStatus === "Нужно сделать"
+                        ? "status__theme--active"
+                        : ""
+                    }`}
                     onClick={() => {
                       handleStatusChange("Нужно сделать");
                     }}
                   >
-                    <p className="_gray">Нужно сделать</p>
+                    <p>Нужно сделать</p>
                   </div>
                   <div
-                    className="status__theme"
+                    className={`status__theme ${
+                      activeStatus === "В работе" ? "status__theme--active" : ""
+                    }`}
                     onClick={() => {
                       handleStatusChange("В работе");
                     }}
                   >
-                    <p className="_gray">В работе</p>
+                    <p>В работе</p>
                   </div>
                   <div
-                    className="status__theme"
+                    className={`status__theme ${
+                      activeStatus === "Тестирование"
+                        ? "status__theme--active"
+                        : ""
+                    }`}
                     onClick={() => {
                       handleStatusChange("Тестирование");
                     }}
                   >
-                    <p className="_gray">Тестирование</p>
+                    <p>Тестирование</p>
                   </div>
                   <div
-                    className="status__theme"
+                    className={`status__theme ${
+                      activeStatus === "Готово" ? "status__theme--active" : ""
+                    }`}
                     onClick={() => {
                       handleStatusChange("Готово");
                     }}
                   >
-                    <p className="_gray">Готово</p>
+                    <p>Готово</p>
                   </div>
                 </div>
               )}
