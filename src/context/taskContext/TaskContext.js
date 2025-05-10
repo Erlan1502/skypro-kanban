@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const Task = createContext(null);
+export const TaskContext = createContext(null);

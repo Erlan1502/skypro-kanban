@@ -19,6 +19,7 @@ const PopUser = ({ $isVisible }) => {
   };
   const userData = JSON.parse(localStorage.getItem("userInfo")) || {};
   const { name, login } = userData;
+
   return (
     <PopUserContainer $isVisible={$isVisible}>
       <Name>{`${name}`}</Name>

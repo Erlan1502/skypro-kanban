@@ -4,6 +4,7 @@ import { AppWrapper } from "./App.styled.js";
 import "./App.css";
 import AppRoutes from "./AppRoutes";
 import AuthProvider from "./context/authContext/AuthProvider.jsx";
+import { TaskProvider } from "./context/taskContext/TaskProvider.jsx";
 
 const App = () => {
   return (
@@ -11,7 +12,9 @@ const App = () => {
       <GlobalStyles />
       <AppWrapper>
         <AuthProvider>
-          <AppRoutes />
+          <TaskProvider>
+            <AppRoutes />
+          </TaskProvider>
         </AuthProvider>
       </AppWrapper>
     </>
