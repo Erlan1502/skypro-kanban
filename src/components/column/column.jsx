@@ -5,17 +5,8 @@ import {
   SColumnTitle,
   SColumnTitleParagraph,
 } from "./column.styled.js";
-import { cardList } from "../../data.js";
-import { useState, useEffect } from "react";
 
-const Column = ({ status }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const cardsWithoutStatus = cardList.filter((card) => card.status === status);
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, []);
+const Column = ({ status, isLoading, tasks, onTaskDeleted, onTaskUpdated }) => {
   return (
     <SColumnTitle>
       <SColumnTitleParagraph>
@@ -25,19 +16,24 @@ const Column = ({ status }) => {
         {isLoading ? (
           <div>Данные загружаются...</div>
         ) : (
-          cardsWithoutStatus.map((card) => (
-            <Card
-              key={card.id}
-              id={card.id}
-              theme={card.theme}
-              date={card.date}
-              status={card.status}
-              title={card.title}
-            />
-          ))
+          tasks.map((card) => {
+            return (
+              <Card
+                key={card._id}
+                id={card._id}
+                theme={card.topic}
+                date={card.date}
+                status={card.status}
+                title={card.title}
+                onTaskDeleted={onTaskDeleted} //проброс в кардс
+                onTaskUpdated={onTaskUpdated} //проброс в кардс
+              />
+            );
+          })
         )}
       </SCards>
     </SColumnTitle>
   );
 };
+
 export { Column };

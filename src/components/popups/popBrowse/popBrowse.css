@@ -112,6 +112,9 @@
   margin-top: 14px;
   height: 200px;
 }
+.white {
+  background-color: white;
+}
 
 .form-browse__area::-moz-placeholder {
   font-weight: 400;
@@ -151,6 +154,12 @@
   padding: 11px 14px 10px;
   margin-right: 7px;
   margin-bottom: 7px;
+}
+.status__theme--active {
+  background: rgb(148, 166, 190);
+  > p {
+    color: rgb(255, 255, 255);
+  }
 }
 
 .status__theme p {

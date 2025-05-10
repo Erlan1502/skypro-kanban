@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Column } from "../../components/column/column.jsx";
 import {
   SMainFirst,
@@ -9,39 +9,91 @@ import {
 } from "./HomePage.styled.js";
 import { Outlet } from "react-router-dom";
 import Header from "../../components/header/header.jsx";
+import PopNewCard from "../../components/popups/popNewCard/popNewCard.jsx";
+import { getTasks } from "../../services/tasks";
 
-const toUpperCase = (statusLower) => {
-  return statusLower.toUpperCase();
-};
-
+const statuses = [
+  "Без статуса",
+  "Нужно сделать",
+  "В работе",
+  "Тестирование",
+  "Готово",
+];
 const HomePage = ({ setIsAuth }) => {
+  const [tasks, setTasks] = useState([]);
+  const [isPopNewCardOpen, setIsPopNewCardOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const tasksData = await getTasks();
+        setTasks(tasksData);
+      } catch (error) {
+        console.error("Ошибка загрузки задач:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchTasks();
+  }, []);
+
+  const handleTaskCreated = async (newTaskData) => {
+    try {
+      setTasks(newTaskData.tasks);
+      setIsPopNewCardOpen(false);
+    } catch (error) {
+      console.error("Ошибка создания задачи:", error);
+    }
+  };
+  const handleTaskDeleted = (deletedTaskId) => {
+    setTasks(tasks.filter((task) => task._id !== deletedTaskId));
+    console.log(tasks);
+  };
+  const handleTaskUpdated = async (updatedTask) => {
+    setTasks(
+      tasks.map((task) => (task._id === updatedTask._id ? updatedTask : task))
+    );
+    const tasksData =
+      await getTasks(); /* Да это костыль, но справедливости ради, я потратил 3 часа, по итогу не найдя почему оно не рендерится */
+    setTasks(tasksData);
+    console.log(tasks);
+  };
   return (
     <>
-      <Header setIsAuth={setIsAuth} />
+      <Header
+        onAddTask={() => setIsPopNewCardOpen(true)}
+        setIsAuth={setIsAuth}
+      />
+
       <SMainFirst>
         <SMainContainer>
           <SMainBlock>
             <SMainContent>
-              <SMainColumn>
-                <Column status={toUpperCase("Без Статуса")} />
-              </SMainColumn>
-              <SMainColumn>
-                <Column status={toUpperCase("Нужно сделать")} />
-              </SMainColumn>
-              <SMainColumn>
-                <Column status={toUpperCase("В работе")} />
-              </SMainColumn>
-              <SMainColumn>
-                <Column status={toUpperCase("Тестирование")} />
-              </SMainColumn>
-              <SMainColumn>
-                <Column status={toUpperCase("Готово")} />
-              </SMainColumn>
+              {statuses.map((status) => (
+                <SMainColumn key={status}>
+                  <Column
+                    status={status}
+                    tasks={tasks.filter((task) => task.status === status)}
+                    isLoading={isLoading}
+                    onTaskDeleted={handleTaskDeleted}
+                    onTaskUpdated={handleTaskUpdated}
+                  />
+                </SMainColumn>
+              ))}
             </SMainContent>
           </SMainBlock>
         </SMainContainer>
         <Outlet />
       </SMainFirst>
+
+      {isPopNewCardOpen && (
+        <PopNewCard
+          onClose={() => setIsPopNewCardOpen(false)}
+          onTaskCreated={handleTaskCreated}
+        />
+      )}
     </>
   );
 };

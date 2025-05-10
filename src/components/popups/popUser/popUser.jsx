@@ -17,11 +17,12 @@ const PopUser = ({ $isVisible }) => {
     e.preventDefault();
     navigate("/exit");
   };
-
+  const userData = JSON.parse(localStorage.getItem("userInfo")) || {};
+  const { name, login } = userData;
   return (
     <PopUserContainer $isVisible={$isVisible}>
-      <Name>Ivan Ivanov</Name>
-      <Email>ivan.ivanov@gmail.com</Email>
+      <Name>{`${name}`}</Name>
+      <Email>{`${login}`}</Email>
       <ThemeContainer>
         <ThemeText>Темная тема</ThemeText>
         <Checkbox name="checkbox" />

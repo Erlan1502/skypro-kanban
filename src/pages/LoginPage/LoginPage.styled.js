@@ -16,7 +16,6 @@ const LoginContainer = styled.div`
   padding: 50px 60px 50px 60px;
   box-sizing: border-box;
   width: 368px;
-  height: 329px;
 `;
 
 const Title = styled.h2`
@@ -39,24 +38,6 @@ const Title = styled.h2`
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 30px;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin-bottom: 7px;
-  box-sizing: border-box;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
-  border-radius: 8px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 10;
-  padding: 8px 10px 8px 10px;
 `;
 
 const Button = styled.button`
@@ -98,13 +79,23 @@ const Footer = styled.div`
   font-size: 0.8rem;
   color: #999;
 `;
+
+const ErrorDiv = styled.div`
+  color: rgb(248, 77, 77);
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 150%;
+  text-align: center;
+  margin-top: 7px;
+`;
 export {
   PageContainer,
   LoginContainer,
   Title,
   LoginForm,
-  Input,
   Button,
   RegisterLink,
   Footer,
+  ErrorDiv,
 };
