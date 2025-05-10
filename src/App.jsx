@@ -1,18 +1,18 @@
 import React from "react";
-import PopBrowse from "./components/popups/popBrowse/popBrowse.jsx";
-import PopNewCard from "./components/popups/popNewCard/popNewCard.jsx";
-import PopUser from "./components/popups/popUser/popUser.jsx";
 import GlobalStyles from "./GlobalStyles.styled.js";
 import { AppWrapper } from "./App.styled.js";
 import "./App.css";
 import AppRoutes from "./AppRoutes";
+import AuthProvider from "./context/authContext/AuthProvider.jsx";
 
 const App = () => {
   return (
     <>
       <GlobalStyles />
       <AppWrapper>
-        <AppRoutes />
+        <AuthProvider>
+          <AppRoutes />
+        </AuthProvider>
       </AppWrapper>
     </>
   );

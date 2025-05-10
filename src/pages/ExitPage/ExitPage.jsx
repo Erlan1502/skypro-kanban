@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ExitOverlay,
@@ -8,15 +8,16 @@ import {
   ConfirmButton,
   CancelButton,
 } from "./ExitPage.styled.js";
+import { AuthContext } from "../../context/authContext/AuthContext.js";
 
-const ExitPage = ({ setIsAuth }) => {
+const ExitPage = () => {
+  const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = (e) => {
     e.preventDefault();
-    if (typeof setIsAuth === "function") {
-      setIsAuth(false);
-    }
+    logout();
+    navigate("/login");
   };
 
   const handleCancel = (e) => {

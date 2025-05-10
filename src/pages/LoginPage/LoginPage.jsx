@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { AuthContext } from "../../context/authContext/AuthContext.js";
 import {
   PageContainer,
   LoginContainer,
@@ -10,12 +11,11 @@ import {
   ErrorDiv,
 } from "./LoginPage.styled.js";
 import { useState } from "react";
-import { signIn, signUp } from "../../services/auth.js";
 import BaseInput from "../../components/baseInput/BaseInput.jsx";
 
-const LoginPage = ({ isSignUp, setIsAuth }) => {
+const LoginPage = ({ isSignUp }) => {
   const navigate = useNavigate();
-
+  const { login, register } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     name: "",
     login: "",
@@ -93,15 +93,15 @@ const LoginPage = ({ isSignUp, setIsAuth }) => {
       return;
     }
     try {
-      const data = !isSignUp
-        ? await signIn({ login: formData.login, password: formData.password })
-        : await signUp(formData);
-
-      if (data) {
-        setIsAuth(true);
-        localStorage.setItem("userInfo", JSON.stringify(data));
-        navigate("/");
+      if (!isSignUp) {
+        await login({
+          login: formData.login,
+          password: formData.password,
+        });
+      } else {
+        await register(formData);
       }
+      navigate("/");
     } catch (err) {
       setError(err.message);
     }
