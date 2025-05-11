@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./popBrowse.css";
 import styled from "styled-components";
 import { updateTask } from "../../../services/tasks";
+import { TaskContext } from "../../../context/taskContext/TaskContext";
 
 const themeColors = {
   orange: "#FFE4C2",
@@ -37,11 +38,10 @@ const PopBrowse = ({
   title,
   status,
   onClose,
-  onDelete,
-  onTaskUpdate,
   description,
   date,
 }) => {
+  const { onDelete, onTaskUpdate } = useContext(TaskContext);
   const [isOnChange, setIsOnChange] = useState(false);
   let themeColor = "";
   if (theme === "Web Design") {

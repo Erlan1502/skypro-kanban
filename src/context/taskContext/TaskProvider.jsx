@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TaskContext } from "./TaskContext";
-
+import { getTasks, deleteTask } from "../../services/tasks";
 export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [isPopNewCardOpen, setIsPopNewCardOpen] = useState(false);
@@ -23,14 +23,21 @@ export const TaskProvider = ({ children }) => {
     }
   };
 
-  const handleTaskDeleted = (deletedTaskId) => {
+  const handleTaskDeleted = async (deletedTaskId) => {
     setTasks(tasks.filter((task) => task._id !== deletedTaskId));
+    await deleteTask(deletedTaskId);
+    const tasksData = await getTasks();
+    setTasks(tasksData);
   };
 
   const handleTaskUpdated = async (updatedTask) => {
-    setTasks(
-      tasks.map((task) => (task._id === updatedTask._id ? updatedTask : task))
+    const newTasks = tasks.map((task) =>
+      task._id === updatedTask._id ? updatedTask : task
     );
+    setTasks(newTasks);
+    const tasksData = await getTasks();
+    setTasks(tasksData);
+    console.log(newTasks);
   };
 
   const value = {
@@ -41,9 +48,9 @@ export const TaskProvider = ({ children }) => {
     isLoading,
     setIsLoading,
     statuses,
-    handleTaskCreated,
-    handleTaskDeleted,
-    handleTaskUpdated,
+    onTaskCreated: handleTaskCreated,
+    onDelete: handleTaskDeleted,
+    onTaskUpdate: handleTaskUpdated, // для удобства и чтобы не переименовывать всё
   };
 
   return <TaskContext.Provider value={value}>{children}</TaskContext.Provider>;

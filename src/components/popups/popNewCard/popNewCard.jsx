@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./popNewCard.css";
 import { createTask } from "../../../services/tasks";
-const PopNewCard = ({ onTaskCreated, onClose }) => {
+import { TaskContext } from "../../../context/taskContext/TaskContext";
+const PopNewCard = ({ onClose }) => {
+  const { onTaskCreated } = useContext(TaskContext);
   const [formData, setFormData] = useState({
     title: "Новая задача",
     description: "",
@@ -40,7 +42,8 @@ const PopNewCard = ({ onTaskCreated, onClose }) => {
       });
 
       console.log("Task created:", newTask);
-      if (onTaskCreated) onTaskCreated(newTask); // обновление
+      if (onTaskCreated) onTaskCreated(newTask);
+
       setFormData({
         title: "Новая задача",
         description: "",
@@ -48,6 +51,8 @@ const PopNewCard = ({ onTaskCreated, onClose }) => {
         theme: "Research",
         status: "Без статуса",
       });
+
+      if (onClose) onClose();
     } catch (error) {
       console.error("Error creating task:", error);
     } finally {

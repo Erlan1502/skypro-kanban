@@ -6,7 +6,7 @@ import {
   SColumnTitleParagraph,
 } from "./column.styled.js";
 
-const Column = ({ status, isLoading, tasks, onTaskDeleted, onTaskUpdated }) => {
+const Column = ({ status, isLoading, tasks }) => {
   return (
     <SColumnTitle>
       <SColumnTitleParagraph>
@@ -24,9 +24,7 @@ const Column = ({ status, isLoading, tasks, onTaskDeleted, onTaskUpdated }) => {
                 theme={card.topic}
                 date={card.date}
                 status={card.status}
-                title={card.title}
-                onTaskDeleted={onTaskDeleted} //проброс в кардс
-                onTaskUpdated={onTaskUpdated} //проброс в кардс
+                title={card.title} //Удалили проброс в связи с использованием ContextAPI
               />
             );
           })

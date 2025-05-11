@@ -10,19 +10,9 @@ import {
 } from "./card.styled.js";
 import { Link } from "react-router-dom";
 import PopBrowse from "../popups/popBrowse/popBrowse.jsx";
-import { deleteTask } from "../../services/tasks.js";
 
-const Card = ({
-  id,
-  theme,
-  title,
-  date,
-  status,
-  onTaskDeleted,
-  onTaskUpdated,
-}) => {
+const Card = ({ id, theme, title, date, status }) => {
   let themeColor = "";
-
   if (theme === "Web Design") {
     themeColor = "orange";
   } else if (theme === "Copywriting") {
@@ -31,23 +21,6 @@ const Card = ({
     themeColor = "green";
   }
   const [showCard, setShowCard] = useState(false);
-  const handleDelete = async () => {
-    try {
-      await deleteTask(id);
-      if (typeof onTaskDeleted === "function") {
-        onTaskDeleted(id);
-      }
-      setShowCard(false);
-    } catch (error) {
-      console.error("Ошибка:", error);
-    }
-  };
-  const handleChange = async (updatedTask) => {
-    if (typeof onTaskUpdated === "function") {
-      onTaskUpdated(updatedTask);
-    }
-    setShowCard(false);
-  };
   const formatDate = (dateString) => {
     const date = new Date(dateString);
 
@@ -114,8 +87,6 @@ const Card = ({
           status={status}
           id={id}
           onClose={() => setShowCard(false)}
-          onDelete={handleDelete}
-          onTaskUpdate={handleChange}
         />
       )}
     </>

@@ -22,9 +22,6 @@ const HomePage = () => {
     isLoading,
     setIsLoading,
     statuses,
-    handleTaskCreated,
-    handleTaskDeleted,
-    handleTaskUpdated,
   } = useContext(TaskContext);
 
   useEffect(() => {
@@ -56,8 +53,6 @@ const HomePage = () => {
                     status={status}
                     tasks={tasks.filter((task) => task.status === status)}
                     isLoading={isLoading}
-                    onTaskDeleted={handleTaskDeleted}
-                    onTaskUpdated={handleTaskUpdated}
                   />
                 </SMainColumn>
               ))}
@@ -68,10 +63,7 @@ const HomePage = () => {
       </SMainFirst>
 
       {isPopNewCardOpen && (
-        <PopNewCard
-          onClose={() => setIsPopNewCardOpen(false)}
-          onTaskCreated={handleTaskCreated}
-        />
+        <PopNewCard onClose={() => setIsPopNewCardOpen(false)} />
       )}
     </>
   );
