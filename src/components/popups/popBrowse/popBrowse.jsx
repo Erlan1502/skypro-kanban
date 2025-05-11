@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import "./popBrowse.css";
 import styled from "styled-components";
-import { updateTask } from "../../../services/tasks";
+import { deleteTask, updateTask } from "../../../services/tasks";
 import { TaskContext } from "../../../context/taskContext/TaskContext";
 
 const themeColors = {
@@ -73,6 +73,14 @@ const PopBrowse = ({
       status,
     }));
     setActiveStatus(status);
+  };
+  const handleDelete = async (deleteTaskId) => {
+    try {
+      await deleteTask(deleteTaskId);
+      onDelete(deleteTaskId);
+    } catch (error) {
+      console.error("Ошибка при удалении задачи:", error);
+    }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -350,7 +358,7 @@ const PopBrowse = ({
                 )}
                 <button
                   className="btn-browse__delete _btn-bor _hover03"
-                  onClick={() => onDelete(id)}
+                  onClick={() => handleDelete(id)}
                 >
                   <a href="#">Удалить задачу</a>
                 </button>

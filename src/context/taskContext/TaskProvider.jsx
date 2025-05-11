@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TaskContext } from "./TaskContext";
-import { getTasks, deleteTask } from "../../services/tasks";
+import { getTasks } from "../../services/tasks";
 export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [isPopNewCardOpen, setIsPopNewCardOpen] = useState(false);
@@ -25,7 +25,6 @@ export const TaskProvider = ({ children }) => {
 
   const handleTaskDeleted = async (deletedTaskId) => {
     setTasks(tasks.filter((task) => task._id !== deletedTaskId));
-    await deleteTask(deletedTaskId);
     const tasksData = await getTasks();
     setTasks(tasksData);
   };
