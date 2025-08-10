@@ -1,13 +1,13 @@
-import React, { useContext, useState } from "react";
-import "./popBrowse.css";
-import styled from "styled-components";
-import { deleteTask, updateTask } from "../../../services/tasks";
-import { TaskContext } from "../../../context/taskContext/TaskContext";
-
+import React, { useContext, useState } from 'react';
+import './popBrowse.css';
+import styled from 'styled-components';
+import { deleteTask, updateTask } from '../../../services/tasks';
+import { TaskContext } from '../../../context/taskContext/TaskContext';
+import { toast } from 'react-toastify';
 const themeColors = {
-  orange: "#FFE4C2",
-  purple: "#E9D4FF",
-  green: "#B4FDD1",
+  orange: '#FFE4C2',
+  purple: '#E9D4FF',
+  green: '#B4FDD1',
 };
 
 const StyledCardTheme = styled.div`
@@ -18,14 +18,14 @@ const StyledCardTheme = styled.div`
   height: 30px;
   padding: 8px 20px 8px 20px;
   border-radius: 24px;
-  background-color: ${({ $color }) => themeColors[$color] || "#EEE"};
+  background-color: ${({ $color }) => themeColors[$color] || '#EEE'};
   p {
     color: ${({ $color }) =>
-      $color === "orange"
-        ? "#FF6D00"
-        : $color === "purple"
-        ? "#9A48F1"
-        : "#06B16E"};
+      $color === 'orange'
+        ? '#FF6D00'
+        : $color === 'purple'
+        ? '#9A48F1'
+        : '#06B16E'};
     font-size: 14px;
     font-weight: 600;
     line-height: 10px;
@@ -43,13 +43,13 @@ const PopBrowse = ({
 }) => {
   const { onDelete, onTaskUpdate } = useContext(TaskContext);
   const [isOnChange, setIsOnChange] = useState(false);
-  let themeColor = "";
-  if (theme === "Web Design") {
-    themeColor = "orange";
-  } else if (theme === "Copywriting") {
-    themeColor = "purple";
-  } else if (theme === "Research") {
-    themeColor = "green";
+  let themeColor = '';
+  if (theme === 'Web Design') {
+    themeColor = 'orange';
+  } else if (theme === 'Copywriting') {
+    themeColor = 'purple';
+  } else if (theme === 'Research') {
+    themeColor = 'green';
   }
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -78,8 +78,9 @@ const PopBrowse = ({
     try {
       await deleteTask(id);
       onDelete(id);
+      toast.success('Задача успешно удалена!');
     } catch (error) {
-      console.error("Ошибка при удалении задачи:", error);
+      toast.error(error.message);
     }
   };
   const handleSubmit = async (e) => {
@@ -96,9 +97,10 @@ const PopBrowse = ({
       });
 
       if (onTaskUpdate) onTaskUpdate(updatedTask);
+      toast.success('Задача успешно обновлена!');
       onClose();
     } catch (error) {
-      console.error("Ошибка при обновлении задачи:", error);
+      toast.error(error.message);
     } finally {
       setIsSubmitting(false);
     }
@@ -120,56 +122,56 @@ const PopBrowse = ({
                 <div className="status__themes">
                   <div
                     className={`status__theme ${
-                      activeStatus === "Без статуса"
-                        ? "status__theme--active"
-                        : ""
+                      activeStatus === 'Без статуса'
+                        ? 'status__theme--active'
+                        : ''
                     }`}
                     onClick={() => {
-                      handleStatusChange("Без статуса");
+                      handleStatusChange('Без статуса');
                     }}
                   >
                     <p>Без статуса</p>
                   </div>
                   <div
                     className={`status__theme ${
-                      activeStatus === "Нужно сделать"
-                        ? "status__theme--active"
-                        : ""
+                      activeStatus === 'Нужно сделать'
+                        ? 'status__theme--active'
+                        : ''
                     }`}
                     onClick={() => {
-                      handleStatusChange("Нужно сделать");
+                      handleStatusChange('Нужно сделать');
                     }}
                   >
                     <p>Нужно сделать</p>
                   </div>
                   <div
                     className={`status__theme ${
-                      activeStatus === "В работе" ? "status__theme--active" : ""
+                      activeStatus === 'В работе' ? 'status__theme--active' : ''
                     }`}
                     onClick={() => {
-                      handleStatusChange("В работе");
+                      handleStatusChange('В работе');
                     }}
                   >
                     <p>В работе</p>
                   </div>
                   <div
                     className={`status__theme ${
-                      activeStatus === "Тестирование"
-                        ? "status__theme--active"
-                        : ""
+                      activeStatus === 'Тестирование'
+                        ? 'status__theme--active'
+                        : ''
                     }`}
                     onClick={() => {
-                      handleStatusChange("Тестирование");
+                      handleStatusChange('Тестирование');
                     }}
                   >
                     <p>Тестирование</p>
                   </div>
                   <div
                     className={`status__theme ${
-                      activeStatus === "Готово" ? "status__theme--active" : ""
+                      activeStatus === 'Готово' ? 'status__theme--active' : ''
                     }`}
                     onClick={() => {
-                      handleStatusChange("Готово");
+                      handleStatusChange('Готово');
                     }}
                   >
                     <p>Готово</p>
@@ -314,7 +316,7 @@ const PopBrowse = ({
                   <input type="hidden" id="datepick_value" value="08.09.2023" />
                   <div className="calendar__period">
                     <p className="calendar__p date-end">
-                      Срок исполнения:{" "}
+                      Срок исполнения:{' '}
                       <span className="date-control">09.09.23</span>
                     </p>
                   </div>

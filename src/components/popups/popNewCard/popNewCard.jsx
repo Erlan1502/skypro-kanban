@@ -1,15 +1,16 @@
-import React, { useContext, useState } from "react";
-import "./popNewCard.css";
-import { createTask } from "../../../services/tasks";
-import { TaskContext } from "../../../context/taskContext/TaskContext";
+import React, { useContext, useState } from 'react';
+import './popNewCard.css';
+import { createTask } from '../../../services/tasks';
+import { TaskContext } from '../../../context/taskContext/TaskContext';
+import { toast } from 'react-toastify';
 const PopNewCard = ({ onClose }) => {
   const { onTaskCreated } = useContext(TaskContext);
   const [formData, setFormData] = useState({
-    title: "Новая задача",
-    description: "",
-    date: "",
-    theme: "Research",
-    status: "Без статуса",
+    title: 'Новая задача',
+    description: '',
+    date: '',
+    theme: 'Research',
+    status: 'Без статуса',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,6 +32,14 @@ const PopNewCard = ({ onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
+    if (!formData.title.trim()) {
+      toast.error('Название задачи не может быть пустым.');
+      return;
+    }
+    if (!formData.description.trim()) {
+      toast.error('Заполните описание задачи.');
+      return;
+    }
     setIsSubmitting(true);
     try {
       const newTask = await createTask({
@@ -42,18 +51,18 @@ const PopNewCard = ({ onClose }) => {
       });
 
       if (onTaskCreated) onTaskCreated(newTask);
-
+      toast.success('Задача успешно создана!');
       setFormData({
-        title: "Новая задача",
-        description: "",
-        date: "",
-        theme: "Research",
-        status: "Без статуса",
+        title: 'Новая задача',
+        description: '',
+        date: '',
+        theme: 'Research',
+        status: 'Без статуса',
       });
 
       if (onClose) onClose();
     } catch (error) {
-      console.error("Error creating task:", error);
+      toast.error(error.message);
     } finally {
       setIsSubmitting(false);
     }
@@ -151,18 +160,18 @@ const PopNewCard = ({ onClose }) => {
                           <div
                             key={index}
                             className={`calendar__cell 
-                  ${index < 3 || index > 33 ? "_other-month" : "_cell-day"} 
-                  ${(index - 3) % 7 >= 5 ? "_weekend" : ""} 
-                  ${day === 8 ? "_current" : ""}`}
+                  ${index < 3 || index > 33 ? '_other-month' : '_cell-day'} 
+                  ${(index - 3) % 7 >= 5 ? '_weekend' : ''} 
+                  ${day === 8 ? '_current' : ''}`}
                             onClick={() => {
                               const newDate = `${day
                                 .toString()
-                                .padStart(2, "0")}.09.2023`;
+                                .padStart(2, '0')}.09.2023`;
                               setFormData((prev) => ({
                                 ...prev,
                                 date: newDate,
                               }));
-                              document.getElementById("datepick_value").value =
+                              document.getElementById('datepick_value').value =
                                 newDate;
                             }}
                           >
@@ -174,13 +183,13 @@ const PopNewCard = ({ onClose }) => {
                     <input
                       type="hidden"
                       id="datepick_value"
-                      value={formData.date || "08.09.2023"}
+                      value={formData.date || '08.09.2023'}
                     />
                     <div className="calendar__period">
                       <p className="calendar__p date-end">
                         {formData.date
                           ? `Выбрана дата: ${formData.date}`
-                          : "Выберите срок исполнения"}
+                          : 'Выберите срок исполнения'}
                       </p>
                     </div>
                   </div>
@@ -191,29 +200,29 @@ const PopNewCard = ({ onClose }) => {
                   <div className="categories__themes">
                     <div
                       className={`categories__theme _orange ${
-                        formData.theme === "Web Design"
-                          ? "_active-category"
-                          : ""
+                        formData.theme === 'Web Design'
+                          ? '_active-category'
+                          : ''
                       }`}
-                      onClick={() => handleThemeChange("Web Design")}
+                      onClick={() => handleThemeChange('Web Design')}
                     >
                       <p className="_orange">Web Design</p>
                     </div>
                     <div
                       className={`categories__theme _green ${
-                        formData.theme === "Research" ? "_active-category" : ""
+                        formData.theme === 'Research' ? '_active-category' : ''
                       }`}
-                      onClick={() => handleThemeChange("Research")}
+                      onClick={() => handleThemeChange('Research')}
                     >
                       <p className="_green">Research</p>
                     </div>
                     <div
                       className={`categories__theme _purple ${
-                        formData.theme === "Copywriting"
-                          ? "_active-category"
-                          : ""
+                        formData.theme === 'Copywriting'
+                          ? '_active-category'
+                          : ''
                       }`}
-                      onClick={() => handleThemeChange("Copywriting")}
+                      onClick={() => handleThemeChange('Copywriting')}
                     >
                       <p className="_purple">Copywriting</p>
                     </div>

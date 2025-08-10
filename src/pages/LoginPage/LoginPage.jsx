@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { AuthContext } from "../../context/authContext/AuthContext.js";
+import React, { useContext } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { AuthContext } from '../../context/authContext/AuthContext.js';
 import {
   PageContainer,
   LoginContainer,
@@ -9,35 +9,35 @@ import {
   Button,
   RegisterLink,
   ErrorDiv,
-} from "./LoginPage.styled.js";
-import { useState } from "react";
-import BaseInput from "../../components/baseInput/BaseInput.jsx";
+} from './LoginPage.styled.js';
+import { useState } from 'react';
+import BaseInput from '../../components/baseInput/BaseInput.jsx';
 
 const LoginPage = ({ isSignUp }) => {
   const navigate = useNavigate();
   const { login, register } = useContext(AuthContext);
   const [formData, setFormData] = useState({
-    name: "",
-    login: "",
-    password: "",
+    name: '',
+    login: '',
+    password: '',
   });
 
   const [errors, setErrors] = useState({
-    name: "",
-    login: "",
-    password: "",
+    name: '',
+    login: '',
+    password: '',
   });
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const validateForm = () => {
-    const newErrors = { name: "", login: "", password: "" };
+    const newErrors = { name: '', login: '', password: '' };
     let isValid = true;
 
     if (isSignUp && !formData.name.trim()) {
       newErrors.name = true;
       setError(
-        "Введенные вами данные не корректны. Чтобы завершить регистрацию, заполните все поля в форме."
+        'Введенные вами данные не корректны. Чтобы завершить регистрацию, заполните все поля в форме.'
       );
       isValid = false;
     }
@@ -45,7 +45,7 @@ const LoginPage = ({ isSignUp }) => {
     if (isSignUp && !formData.login.trim()) {
       newErrors.login = true;
       setError(
-        "Введенные вами данные не корректны. Чтобы завершить регистрацию, заполните все поля в форме."
+        'Введенные вами данные не корректны. Чтобы завершить регистрацию, заполните все поля в форме.'
       );
       isValid = false;
     }
@@ -53,7 +53,7 @@ const LoginPage = ({ isSignUp }) => {
     if (isSignUp && !formData.password.trim()) {
       newErrors.password = true;
       setError(
-        "Введенные вами данные не корректны. Чтобы завершить регистрацию, заполните все поля в форме."
+        'Введенные вами данные не корректны. Чтобы завершить регистрацию, заполните все поля в форме.'
       );
       isValid = false;
     }
@@ -61,7 +61,7 @@ const LoginPage = ({ isSignUp }) => {
     if (!isSignUp && !formData.login.trim()) {
       newErrors.login = true;
       setError(
-        "Введенные вами данные не распознаны. Проверьте свой логин и пароль и повторите попытку входа."
+        'Введенные вами данные не распознаны. Проверьте свой логин и пароль и повторите попытку входа.'
       );
       isValid = false;
     }
@@ -69,7 +69,7 @@ const LoginPage = ({ isSignUp }) => {
     if (!isSignUp && !formData.password.trim()) {
       newErrors.password = true;
       setError(
-        "Введенные вами данные не распознаны. Проверьте свой логин и пароль и повторите попытку входа."
+        'Введенные вами данные не распознаны. Проверьте свой логин и пароль и повторите попытку входа.'
       );
       isValid = false;
     }
@@ -84,7 +84,7 @@ const LoginPage = ({ isSignUp }) => {
       [name]: value,
     });
     setErrors({ ...errors, [name]: false });
-    setError("");
+    setError('');
   };
 
   const handleSubmit = async (e) => {
@@ -101,7 +101,7 @@ const LoginPage = ({ isSignUp }) => {
       } else {
         await register(formData);
       }
-      navigate("/");
+      navigate('/');
     } catch (err) {
       setError(err.message);
     }
@@ -109,7 +109,7 @@ const LoginPage = ({ isSignUp }) => {
   return (
     <PageContainer>
       <LoginContainer>
-        <Title>{isSignUp ? "Регистрация" : "Вход"}</Title>
+        <Title>{isSignUp ? 'Регистрация' : 'Вход'}</Title>
 
         <LoginForm onSubmit={handleSubmit}>
           {isSignUp && (
@@ -144,13 +144,13 @@ const LoginPage = ({ isSignUp }) => {
           <ErrorDiv>{error}</ErrorDiv>
 
           <Button type="secondary" data-fullwidth={true}>
-            {isSignUp ? "Зарегистрироваться" : "Войти"}
+            {isSignUp ? 'Зарегистрироваться' : 'Войти'}
           </Button>
         </LoginForm>
 
         {!isSignUp && (
           <RegisterLink>
-            Нужно зарегистрироваться?{" "}
+            Нужно зарегистрироваться?{' '}
             <Link to="/register">Регистрируйтесь здесь</Link>
           </RegisterLink>
         )}

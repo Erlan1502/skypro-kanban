@@ -6,6 +6,9 @@ import AppRoutes from './AppRoutes';
 import AuthProvider from './context/authContext/AuthProvider.jsx';
 import { TaskProvider } from './context/taskContext/TaskProvider.jsx';
 import { CustomThemeProvider } from './context/themeContext/themeProvider.jsx';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const App = () => {
   return (
     <>
@@ -19,6 +22,13 @@ const App = () => {
           </AuthProvider>
         </AppWrapper>
       </CustomThemeProvider>
+      <ToastContainer
+        position="top"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+      />
     </>
   );
 };
