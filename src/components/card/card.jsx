@@ -44,7 +44,7 @@ const Card = ({ id, theme, title, date, status }) => {
           </CardButton>
         </CardGroup>
         <CardContent>
-          <Link to={`/card/${id}`} target="_self" rel="noopener noreferrer">
+          <Link onClick={() => setShowCard(true)} target="_self" rel="noopener noreferrer">
             <CardTitle>{title}</CardTitle>
           </Link>
           <CardDate>
