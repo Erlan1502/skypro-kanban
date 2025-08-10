@@ -1,16 +1,16 @@
-import React from "react";
-import GlobalStyles from "./GlobalStyles.styled.js";
-import { AppWrapper } from "./App.styled.js";
-import "./App.css";
-import AppRoutes from "./AppRoutes";
-import AuthProvider from "./context/authContext/AuthProvider.jsx";
-import { TaskProvider } from "./context/taskContext/TaskProvider.jsx";
-import { CustomThemeProvider } from "./context/themeContext/themeProvider.jsx";
+import React from 'react';
+import GlobalStyles from './GlobalStyles.styled.js';
+import { AppWrapper } from './App.styled.js';
+import './App.css';
+import AppRoutes from './AppRoutes';
+import AuthProvider from './context/authContext/AuthProvider.jsx';
+import { TaskProvider } from './context/taskContext/TaskProvider.jsx';
+import { CustomThemeProvider } from './context/themeContext/themeProvider.jsx';
 const App = () => {
   return (
     <>
-      <GlobalStyles />
-        <CustomThemeProvider>
+      <CustomThemeProvider>
+        <GlobalStyles />
         <AppWrapper>
           <AuthProvider>
             <TaskProvider>

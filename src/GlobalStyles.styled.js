@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -45,6 +45,7 @@ const GlobalStyles = createGlobalStyle`
     height: 100%;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
     color: #000000;
+    background-color: ${({ theme }) => theme.colors.backgroundSecondary};
   }
 `;
 
