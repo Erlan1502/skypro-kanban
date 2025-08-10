@@ -1,10 +1,11 @@
-import React from "react";
-import { Card } from "../card/card.jsx";
+import React from 'react';
+import { Card } from '../card/card.jsx';
+import LoadingCard from '../loading/LoadingCard.jsx';
 import {
   SCards,
   SColumnTitle,
   SColumnTitleParagraph,
-} from "./column.styled.js";
+} from './column.styled.js';
 
 const Column = ({ status, isLoading, tasks }) => {
   return (
@@ -14,20 +15,24 @@ const Column = ({ status, isLoading, tasks }) => {
       </SColumnTitleParagraph>
       <SCards>
         {isLoading ? (
-          <div>Данные загружаются...</div>
+          <>
+            <LoadingCard />
+            <LoadingCard />
+            <LoadingCard />
+          </>
+        ) : tasks.length > 0 ? (
+          tasks.map((card) => (
+            <Card
+              key={card._id}
+              id={card._id}
+              theme={card.topic}
+              date={card.date}
+              status={card.status}
+              title={card.title}
+            />
+          ))
         ) : (
-          tasks.map((card) => {
-            return (
-              <Card
-                key={card._id}
-                id={card._id}
-                theme={card.topic}
-                date={card.date}
-                status={card.status}
-                title={card.title}
-              />
-            );
-          })
+          <></>
         )}
       </SCards>
     </SColumnTitle>
