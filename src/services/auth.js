@@ -5,12 +5,18 @@ export async function signIn(userData) {
   try {
     const data = await axios.post(API_URL + '/login', userData, {
       headers: {
-        'Content-Type': '',
+        'Content-Type': 'application/json',
       },
     });
     return data.data.user;
   } catch (error) {
-    throw new Error(error.response.data.error);
+    if (error.response) {
+      throw new Error(error.response.data.error);
+    } else {
+      throw new Error(
+        'Не удалось подключиться к серверу. Проверьте ваше интернет-соединение.'
+      );
+    }
   }
 }
 
@@ -21,13 +27,18 @@ export async function signUp({ name, login, password }) {
       { login, name, password },
       {
         headers: {
-          'Content-Type': '',
+          'Content-Type': 'application/json',
         },
       }
     );
     return data.data.user;
   } catch (error) {
-    console.log(error);
-    throw new Error(error.response.data.error);
+    if (error.response) {
+      throw new Error(error.response.data.error);
+    } else {
+      throw new Error(
+        'Не удалось подключиться к серверу. Проверьте ваше интернет-соединение.'
+      );
+    }
   }
 }
