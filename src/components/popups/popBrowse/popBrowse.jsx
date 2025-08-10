@@ -94,7 +94,6 @@ const PopBrowse = ({
         topic: formData.theme,
         status: formData.status,
       });
-      console.log("Задача обновлена:", updatedTask); //проверка
 
       if (onTaskUpdate) onTaskUpdate(updatedTask);
       onClose();

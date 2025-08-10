@@ -24,7 +24,7 @@ const Column = ({ status, isLoading, tasks }) => {
                 theme={card.topic}
                 date={card.date}
                 status={card.status}
-                title={card.title} //Удалили проброс в связи с использованием ContextAPI
+                title={card.title}
               />
             );
           })

@@ -36,7 +36,6 @@ export const TaskProvider = ({ children }) => {
     setTasks(newTasks);
     const tasksData = await getTasks();
     setTasks(tasksData);
-    console.log(newTasks);
   };
 
   const value = {
@@ -49,7 +48,7 @@ export const TaskProvider = ({ children }) => {
     statuses,
     onTaskCreated: handleTaskCreated,
     onDelete: handleTaskDeleted,
-    onTaskUpdate: handleTaskUpdated, // для удобства и чтобы не переименовывать всё
+    onTaskUpdate: handleTaskUpdated,
   };
 
   return <TaskContext.Provider value={value}>{children}</TaskContext.Provider>;

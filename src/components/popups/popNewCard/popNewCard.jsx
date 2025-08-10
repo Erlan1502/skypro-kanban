@@ -41,7 +41,6 @@ const PopNewCard = ({ onClose }) => {
         status: formData.status,
       });
 
-      console.log("Task created:", newTask);
       if (onTaskCreated) onTaskCreated(newTask);
 
       setFormData({
@@ -165,7 +164,7 @@ const PopNewCard = ({ onClose }) => {
                               }));
                               document.getElementById("datepick_value").value =
                                 newDate;
-                            }} // Упрощенный способ на будущее(с месяцами и тд)
+                            }}
                           >
                             {day}
                           </div>
