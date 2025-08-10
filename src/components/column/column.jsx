@@ -32,7 +32,7 @@ const Column = ({ status, isLoading, tasks }) => {
             />
           ))
         ) : (
-          <></>
+          <p>Задач пока нет</p>
         )}
       </SCards>
     </SColumnTitle>
