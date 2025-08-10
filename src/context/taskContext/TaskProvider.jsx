@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TaskContext } from "./TaskContext";
-import { getTasks } from "../../services/tasks";
+
 export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [isPopNewCardOpen, setIsPopNewCardOpen] = useState(false);
@@ -14,28 +14,21 @@ export const TaskProvider = ({ children }) => {
     "Готово",
   ];
 
-  const handleTaskCreated = async (newTaskData) => {
+  const handleTaskCreated = async (createResponse) => {
     try {
-      setTasks(newTaskData.tasks);
+      setTasks(createResponse.tasks);
       setIsPopNewCardOpen(false);
     } catch (error) {
-      console.error("Ошибка создания задачи:", error);
+      console.error("Ошибка обработки созданной задачи:", error);
     }
   };
 
-  const handleTaskDeleted = async (deletedTaskId) => {
-    setTasks(tasks.filter((task) => task._id !== deletedTaskId));
-    const tasksData = await getTasks();
-    setTasks(tasksData);
+  const handleTaskDeleted = async (deleteResponse) => {
+    setTasks(deleteResponse.tasks);
   };
 
-  const handleTaskUpdated = async (updatedTask) => {
-    const newTasks = tasks.map((task) =>
-      task._id === updatedTask._id ? updatedTask : task
-    );
-    setTasks(newTasks);
-    const tasksData = await getTasks();
-    setTasks(tasksData);
+  const handleTaskUpdated = async (updateResponse) => {
+    setTasks(updateResponse.tasks);
   };
 
   const value = {

@@ -57,7 +57,7 @@ export async function updateTask(id, updatedData) {
         Authorization: `Bearer ${token}`,
       },
     });
-    return response.data.tasks;
+    return response.data;
   } catch (error) {
     throw new Error(error.response.data.error);
   }
@@ -77,7 +77,7 @@ export async function deleteTask(id) {
         Authorization: `Bearer ${token}`,
       },
     });
-    return response.data; // Возвращаем обновленные данные
+    return response.data; 
   } catch (error) {
     throw new Error(
       error.response?.data?.error || "Ошибка при удалении задачи"
