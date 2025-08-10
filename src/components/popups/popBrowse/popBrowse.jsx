@@ -74,10 +74,10 @@ const PopBrowse = ({
     }));
     setActiveStatus(status);
   };
-  const handleDelete = async (deleteTaskId) => {
+  const handleDelete = async () => {
     try {
-      await deleteTask(deleteTaskId);
-      onDelete(deleteTaskId);
+      await deleteTask(id);
+      onDelete(id);
     } catch (error) {
       console.error("Ошибка при удалении задачи:", error);
     }
@@ -357,7 +357,7 @@ const PopBrowse = ({
                 )}
                 <button
                   className="btn-browse__delete _btn-bor _hover03"
-                  onClick={() => handleDelete(id)}
+                  onClick={() => handleDelete()}
                 >
                   <a href="#">Удалить задачу</a>
                 </button>

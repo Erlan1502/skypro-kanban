@@ -23,8 +23,8 @@ export const TaskProvider = ({ children }) => {
     }
   };
 
-  const handleTaskDeleted = async (deleteResponse) => {
-    setTasks(deleteResponse.tasks);
+  const handleTaskDeleted = async (deletedTaskId) => {
+    setTasks(prevTasks => prevTasks.filter(task => task._id !== deletedTaskId));
   };
 
   const handleTaskUpdated = async (updateResponse) => {
