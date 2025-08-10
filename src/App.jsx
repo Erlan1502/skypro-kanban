@@ -5,18 +5,20 @@ import "./App.css";
 import AppRoutes from "./AppRoutes";
 import AuthProvider from "./context/authContext/AuthProvider.jsx";
 import { TaskProvider } from "./context/taskContext/TaskProvider.jsx";
-
+import { CustomThemeProvider } from "./context/themeContext/themeProvider.jsx";
 const App = () => {
   return (
     <>
       <GlobalStyles />
-      <AppWrapper>
-        <AuthProvider>
-          <TaskProvider>
-            <AppRoutes />
-          </TaskProvider>
-        </AuthProvider>
-      </AppWrapper>
+        <CustomThemeProvider>
+        <AppWrapper>
+          <AuthProvider>
+            <TaskProvider>
+              <AppRoutes />
+            </TaskProvider>
+          </AuthProvider>
+        </AppWrapper>
+      </CustomThemeProvider>
     </>
   );
 };

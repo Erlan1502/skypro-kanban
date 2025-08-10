@@ -26,7 +26,7 @@ export const CardWrapper = styled.div`
   width: 100%;
   max-width: 220px;
   min-height: 130px;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -86,7 +86,7 @@ export const CardTitle = styled.h3`
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
-  color: #000000;
+  color: ${({ theme }) => theme.colors.text};
   margin-bottom: 10px;
 `;
 

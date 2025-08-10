@@ -9,10 +9,11 @@ import {
   Checkbox,
   LogoutButton,
 } from "./popUser.styled.js";
+import { useTheme } from "../../../context/themeContext/themeProvider.jsx";
 
 const PopUser = ({ $isVisible }) => {
   const navigate = useNavigate();
-
+  const { themeName, toggleTheme } = useTheme();
   const handleLogoutClick = (e) => {
     e.preventDefault();
     navigate("/exit");
@@ -26,7 +27,11 @@ const PopUser = ({ $isVisible }) => {
       <Email>{`${login}`}</Email>
       <ThemeContainer>
         <ThemeText>Темная тема</ThemeText>
-        <Checkbox name="checkbox" />
+        <Checkbox
+          name="checkbox"
+          checked={themeName === 'dark'}
+          onChange={toggleTheme}
+        />
       </ThemeContainer>
       <LogoutButton onClick={handleLogoutClick}>Выйти</LogoutButton>
     </PopUserContainer>

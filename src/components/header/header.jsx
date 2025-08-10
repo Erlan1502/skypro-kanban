@@ -9,19 +9,19 @@ import {
   UserButton,
 } from "./header.styled.js";
 import PopUser from "../popups/popUser/popUser.jsx";
-
+import { useTheme } from "styled-components";
 const Header = ({ onAddTask }) => {
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
   const userData = JSON.parse(localStorage.getItem("userInfo")) || {};
   const { name } = userData;
-
+  const theme = useTheme();
   return (
     <HeaderWrapper>
       <HeaderContainer>
         <HeaderBlock>
           <Logo>
             <a href="" target="_self" rel="noopener noreferrer">
-              <img src="/logo.png" alt="logo" />
+              <img src={theme.logoUrl} alt="logo" />
             </a>
           </Logo>
           <Nav>
