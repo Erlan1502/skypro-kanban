@@ -35,7 +35,7 @@ export async function createTask(taskData) {
     const response = await axios.post(API_URL + '/kanban', taskData, {
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
+        'Content-Type': '',
       },
     });
     return response.data;
@@ -51,7 +51,7 @@ export async function updateTask(id, updatedData) {
     const response = await axios.put(`${API_URL}/kanban/${id}`, updatedData, {
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
+        'Content-Type': '',
       },
     });
     return response.data;
