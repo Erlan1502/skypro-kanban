@@ -139,16 +139,6 @@ const PopNewCard = ({ onClose }) => {
                     </S.CategoryTheme>
                   </S.CategoriesThemes>
                 </S.CategoriesWrapper>
-
-                <div>
-                  <S.CreateButton
-                    type="submit"
-                    id="btnCreate"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? 'Создание...' : 'Создать задачу'}
-                  </S.CreateButton>
-                </div>
               </S.StyledForm>
 
               <S.CalendarWrapper>
@@ -222,6 +212,15 @@ const PopNewCard = ({ onClose }) => {
                 </S.CalendarBlock>
               </S.CalendarWrapper>
             </S.Wrap>
+            <div>
+              <S.CreateButton
+                type="submit"
+                id="btnCreate"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Создание...' : 'Создать задачу'}
+              </S.CreateButton>
+            </div>
           </S.Content>
         </S.Block>
       </S.Container>
