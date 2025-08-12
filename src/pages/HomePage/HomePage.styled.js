@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SMainFirst = styled.main`
   width: 100%;
@@ -13,7 +13,7 @@ export const SMainContent = styled.div`
   width: 100%;
   display: flex;
   align-items: stretch;
-  justify-content: space-between;
+  justify-content: ${(props) => (props.$isEmpty ? 'center' : 'space-between')};
 `;
 export const SMainColumn = styled.div`
   width: 20%;
@@ -25,4 +25,7 @@ export const SMainContainer = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 0 30px;
+`;
+export const SmainColumnNotExisted = styled.div`
+  font-size: 24px;
 `;

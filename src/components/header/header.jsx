@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   HeaderWrapper,
   HeaderContainer,
@@ -7,12 +8,12 @@ import {
   Nav,
   MainButton,
   UserButton,
-} from "./header.styled.js";
-import PopUser from "../popups/popUser/popUser.jsx";
-import { useTheme } from "styled-components";
-const Header = ({ onAddTask }) => {
+} from './header.styled.js';
+import PopUser from '../popups/popUser/popUser.jsx';
+import { useTheme } from 'styled-components';
+const Header = () => {
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
-  const userData = JSON.parse(localStorage.getItem("userInfo")) || {};
+  const userData = JSON.parse(localStorage.getItem('userInfo')) || {};
   const { name } = userData;
   const theme = useTheme();
   return (
@@ -25,7 +26,9 @@ const Header = ({ onAddTask }) => {
             </a>
           </Logo>
           <Nav>
-            <MainButton onClick={onAddTask}>Создать новую задачу</MainButton>
+            <MainButton as={Link} to="/card/new">
+              Создать новую задачу
+            </MainButton>
             <UserButton onClick={() => setIsPopUpVisible(!isPopUpVisible)}>
               {name}
             </UserButton>

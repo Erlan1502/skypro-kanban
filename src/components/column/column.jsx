@@ -20,7 +20,7 @@ const Column = ({ status, isLoading, tasks }) => {
             <LoadingCard />
             <LoadingCard />
           </>
-        ) : tasks.length > 0 ? (
+        ) : (
           tasks.map((card) => (
             <Card
               key={card._id}
@@ -31,8 +31,6 @@ const Column = ({ status, isLoading, tasks }) => {
               title={card.title}
             />
           ))
-        ) : (
-          <p>Задач пока нет</p>
         )}
       </SCards>
     </SColumnTitle>

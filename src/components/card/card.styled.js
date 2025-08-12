@@ -1,17 +1,13 @@
-import { keyframes } from "styled-components";
-import styled from "styled-components";
+import { keyframes } from 'styled-components';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const themeColors = {
-  orange: "#FFE4C2",
-  purple: "#E9D4FF",
-  green: "#B4FDD1",
+  orange: '#FFE4C2',
+  purple: '#E9D4FF',
+  green: '#B4FDD1',
 };
 
-const ThemeText = styled.p`
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 10px;
-`;
 const cardAnimation = keyframes`
   0% {
     height: 0;
@@ -22,7 +18,7 @@ const cardAnimation = keyframes`
     opacity: 1;
   }
 `;
-export const CardWrapper = styled.div`
+export const CardWrapper = styled(Link)`
   width: 100%;
   max-width: 220px;
   min-height: 130px;
@@ -36,6 +32,7 @@ export const CardWrapper = styled.div`
   animation-name: ${cardAnimation};
   animation-duration: 500ms;
   animation-timing-function: linear;
+  text-decoration: none;
 `;
 
 export const CardGroup = styled.div`
@@ -51,14 +48,14 @@ export const CardTheme = styled.div`
   height: 20px;
   padding: 5px 14px;
   border-radius: 18px;
-  background-color: ${({ $color }) => themeColors[$color] || "#EEE"};
+  background-color: ${({ $color }) => themeColors[$color] || '#EEE'};
   p {
     color: ${({ $color }) =>
-      $color === "orange"
-        ? "#FF6D00"
-        : $color === "purple"
-        ? "#9A48F1"
-        : "#06B16E"};
+      $color === 'orange'
+        ? '#FF6D00'
+        : $color === 'purple'
+        ? '#9A48F1'
+        : '#06B16E'};
     font-size: 10px;
     font-weight: 600;
     line-height: 10px;
@@ -86,7 +83,7 @@ export const CardTitle = styled.h3`
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
-  color: ${({ theme }) => theme.colors.text};
+  color: #000000;
   margin-bottom: 10px;
 `;
 

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const HeaderWrapper = styled.header`
   width: 100%;
@@ -49,10 +49,10 @@ export const MainButton = styled.button`
   margin-right: 20px;
   cursor: pointer;
 
-  a {
-    color: #ffffff;
-    text-decoration: none;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 `;
 
 export const UserButton = styled.a`
@@ -68,7 +68,7 @@ export const UserButton = styled.a`
   position: relative;
 
   &::after {
-    content: "";
+    content: '';
     display: block;
     width: 6px;
     height: 6px;

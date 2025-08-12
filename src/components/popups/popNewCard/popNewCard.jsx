@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createTask } from '../../../services/tasks';
 import { TaskContext } from '../../../context/taskContext/TaskContext';
 import { toast } from 'react-toastify';
 import * as S from './popNewCard.styled';
 
-const PopNewCard = ({ onClose }) => {
+const PopNewCard = () => {
+  const navigate = useNavigate();
   const { onTaskCreated } = useContext(TaskContext);
   const [formData, setFormData] = useState({
-    title: 'Новая задача',
+    title: '',
     description: '',
     date: '',
     theme: 'Research',
@@ -15,6 +17,8 @@ const PopNewCard = ({ onClose }) => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleClose = () => navigate('/');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,6 +34,7 @@ const PopNewCard = ({ onClose }) => {
       theme,
     }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
@@ -53,15 +58,7 @@ const PopNewCard = ({ onClose }) => {
 
       if (onTaskCreated) onTaskCreated(newTask);
       toast.success('Задача успешно создана!');
-      setFormData({
-        title: 'Новая задача',
-        description: '',
-        date: '',
-        theme: 'Research',
-        status: 'Без статуса',
-      });
-
-      if (onClose) onClose();
+      handleClose(); // Используем navigate для закрытия
     } catch (error) {
       toast.error(error.message || 'Не удалось создать задачу.');
     } finally {
@@ -80,7 +77,7 @@ const PopNewCard = ({ onClose }) => {
         <S.Block>
           <S.Content>
             <S.ModalTitle>Создание задачи</S.ModalTitle>
-            <S.CloseButton href="#" onClick={onClose}>
+            <S.CloseButton href="#" onClick={handleClose}>
               &#10006;
             </S.CloseButton>
             <S.Wrap>
@@ -95,7 +92,6 @@ const PopNewCard = ({ onClose }) => {
                     autoFocus
                     value={formData.title}
                     onChange={handleChange}
-                    required
                   />
                 </S.FormBlock>
 
@@ -194,7 +190,10 @@ const PopNewCard = ({ onClose }) => {
                               2,
                               '0'
                             )}.09.2023`;
-                            setFormData((prev) => ({ ...prev, date: newDate }));
+                            setFormData((prev) => ({
+                              ...prev,
+                              date: newDate,
+                            }));
                           }}
                         >
                           {day}
@@ -217,6 +216,7 @@ const PopNewCard = ({ onClose }) => {
                 type="submit"
                 id="btnCreate"
                 disabled={isSubmitting}
+                form="formNewCard"
               >
                 {isSubmitting ? 'Создание...' : 'Создать задачу'}
               </S.CreateButton>
