@@ -10,15 +10,20 @@ import {
 } from './HomePage.styled.js';
 import { Outlet } from 'react-router-dom';
 import Header from '../../components/header/header.jsx';
-import PopNewCard from '../../components/popups/popNewCard/popNewCard.jsx';
 import { getTasks } from '../../services/tasks';
 import { TaskContext } from '../../context/taskContext/TaskContext.js';
 
 const HomePage = () => {
-  const { tasks, setTasks, isLoading, setIsLoading, statuses } =
-    useContext(TaskContext);
+  const {
+    tasks,
+    setTasks,
+    isLoading,
+    setIsLoading,
+    statuses,
+  } = useContext(TaskContext);
 
   useEffect(() => {
+    setIsLoading(true); 
     const fetchTasks = async () => {
       try {
         const tasksData = await getTasks();
@@ -41,7 +46,17 @@ const HomePage = () => {
         <SMainContainer>
           <SMainBlock>
             <SMainContent $isEmpty={!tasks || tasks.length === 0}>
-              {tasks && tasks.length > 0 ? (
+              {isLoading ? (
+                statuses.map((status) => (
+                  <SMainColumn key={status}>
+                    <Column
+                      status={status}
+                      tasks={[]}
+                      isLoading={isLoading}
+                    />
+                  </SMainColumn>
+                ))
+              ) : tasks && tasks.length > 0 ? (
                 statuses.map((status) => (
                   <SMainColumn key={status}>
                     <Column

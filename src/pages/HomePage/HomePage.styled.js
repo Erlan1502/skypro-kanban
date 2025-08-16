@@ -28,4 +28,5 @@ export const SMainContainer = styled.div`
 `;
 export const SmainColumnNotExisted = styled.div`
   font-size: 24px;
+  color: ${({ theme }) => theme.colors.text};
 `;
