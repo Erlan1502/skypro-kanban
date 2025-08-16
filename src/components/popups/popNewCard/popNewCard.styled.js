@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 export const PopNewCardWrapper = styled.div`
   width: 100%;
@@ -26,7 +26,7 @@ export const Container = styled.div`
 export const Block = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
+  background-color: ${({ theme }) => theme.colors.background};
   max-width: 630px;
   width: 100%;
   padding: 40px 30px 48px;
@@ -85,7 +85,7 @@ export const SubTitle = styled.label`
   line-height: 1;
 `;
 
-const commonInputStyles = `
+const commonInputStyles = css`
   width: 100%;
   outline: none;
   padding: 14px;
@@ -100,24 +100,33 @@ const commonInputStyles = `
     font-weight: 400;
     font-size: 14px;
     line-height: 1px;
-    color: ${({ theme }) => theme.colors.textSecondary};
+    color: ${({ theme }) => theme.colors.textPlaceholder};
     letter-spacing: -0.14px;
+    color: rgba(148, 166, 190, 1);
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0%;
+    text-align: left;
   }
 `;
 
 export const FormInput = styled.input`
   ${commonInputStyles}
   margin: 20px 0;
-  color: ${({ theme }) => theme.colors.textSecondary};
+  color: ${({ theme }) => theme.colors.text};
+  border: 0.7px solid ${({ $error }) => ($error ? 'red' : 'rgba(148, 166, 190, 0.4)')};
 `;
 
 export const FormTextArea = styled.textarea`
   ${commonInputStyles}
-  color: ${({ theme }) => theme.colors.textSecondary};
+  color: ${({ theme }) => theme.colors.text};
   max-width: 370px;
   margin-top: 14px;
   height: 200px;
   resize: none;
+  border: 0.7px solid ${({ $error }) => ($error ? 'red' : 'rgba(148, 166, 190, 0.4)')};
 `;
 
 export const CreateButton = styled.button`
@@ -142,6 +151,9 @@ export const CreateButton = styled.button`
 export const CalendarWrapper = styled.div`
   width: 182px;
   margin-bottom: 20px;
+  border: 0.7px solid ${({ $error }) => ($error ? 'red' : 'transparent')};
+  border-radius: 8px;
+  padding: 0px;
 `;
 
 export const CalendarTitle = styled.p`

@@ -5,6 +5,20 @@ import { deleteTask, updateTask } from '../../../services/tasks';
 import { TaskContext } from '../../../context/taskContext/TaskContext';
 import { toast } from 'react-toastify';
 import './popBrowse.css';
+import {
+  CalendarWrapper,
+  CalendarTitle,
+  CalendarBlock,
+  CalendarMonth,
+  CalendarContent,
+  CalendarDaysNames,
+  CalendarDayName,
+  CalendarCells,
+  CalendarCell,
+  CalendarNav,
+  CalendarPeriod,
+  CalendarText,
+} from '../../../components/calendar/calendar.styled.js';
 const themeColors = {
   orange: '#FFE4C2',
   purple: '#E9D4FF',
@@ -60,6 +74,19 @@ const PopBrowse = () => {
       });
     }
   }, [id, tasks]);
+
+  const calendarDays = [
+      28, 29, 30, 31, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+      18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 1,
+    ];
+
+    const handleDateChange = (day) => {
+      const newDate = `2023-09-${String(day).padStart(2, '0')}`;
+      setFormData((prev) => ({
+        ...prev,
+        date: newDate,
+      }));
+    };
 
   const handleClose = () => navigate('/');
 
@@ -188,15 +215,53 @@ const PopBrowse = () => {
                 </div>
               </form>
               <div className="pop-new-card__calendar calendar">
-                <p className="calendar__ttl subttl">Даты</p>
-                <div className="calendar__period">
-                  <p className="calendar__p date-end">
-                    Срок исполнения:{' '}
-                    <span className="date-control">
-                      {new Date(formData.date).toLocaleDateString('ru-RU')}
-                    </span>
-                  </p>
-                </div>
+                <CalendarTitle className="subttl">Даты</CalendarTitle>
+                {isOnChange ? (
+                  <CalendarWrapper>
+                    <CalendarBlock>
+                      <CalendarNav>
+                        <CalendarMonth>Сентябрь 2023</CalendarMonth>
+                      </CalendarNav>
+                      <CalendarContent>
+                        <CalendarDaysNames>
+                          <CalendarDayName>пн</CalendarDayName>
+                          <CalendarDayName>вт</CalendarDayName>
+                          <CalendarDayName>ср</CalendarDayName>
+                          <CalendarDayName>чт</CalendarDayName>
+                          <CalendarDayName>пт</CalendarDayName>
+                          <CalendarDayName>сб</CalendarDayName>
+                          <CalendarDayName>вс</CalendarDayName>
+                        </CalendarDaysNames>
+                        <CalendarCells>
+                          {calendarDays.map((day, index) => {
+                            const fullDate = new Date(formData.date);
+                            const isActive = fullDate.getDate() === day && (fullDate.getMonth() + 1) === 9;
+
+                            return (
+                              <CalendarCell
+                                key={index}
+                                $isOtherMonth={index < 4 || index > 33}
+                                $isActive={isActive}
+                                onClick={() => handleDateChange(day)}
+                              >
+                                {day}
+                              </CalendarCell>
+                            );
+                          })}
+                        </CalendarCells>
+                      </CalendarContent>
+                    </CalendarBlock>
+                  </CalendarWrapper>
+                ) : (
+                  <CalendarPeriod>
+                    <CalendarText>
+                      Срок исполнения:{" "}
+                      <span className="date-control">
+                        {new Date(formData.date).toLocaleDateString("ru-RU")}
+                      </span>
+                    </CalendarText>
+                  </CalendarPeriod>
+                )}
               </div>
             </div>
             <div className="pop-browse__btn-browse ">

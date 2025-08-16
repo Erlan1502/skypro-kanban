@@ -10,7 +10,7 @@ export const CalendarTitle = styled.p`
   padding: 0 7px;
   font-size: 14px;
   font-weight: 600;
-  color: #000;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const CalendarBlock = styled.div`
@@ -43,12 +43,6 @@ export const CalendarDayName = styled.div`
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.2px;
-
-  ${({ weekend }) =>
-    weekend &&
-    `
-    color: #94a6be;
-  `}
 `;
 
 export const CalendarCells = styled.div`
@@ -71,41 +65,15 @@ export const CalendarCell = styled.div`
   letter-spacing: -0.2px;
   cursor: pointer;
 
-  ${({ otherMonth }) =>
-    otherMonth &&
-    `
-    opacity: 0;
-  `}
+  opacity: ${({ $isOtherMonth }) => ($isOtherMonth ? "0" : "1")};
+  font-weight: ${({ $isCurrent }) => ($isCurrent ? "700" : "400")};
+  background-color: ${({ $isActive }) => ($isActive ? "#94a6be" : "transparent")};
+  color: ${({ $isActive }) => ($isActive ? "#ffffff" : "#94a6be")};
 
-  ${({ cellDay }) =>
-    cellDay &&
-    `
-    color: #94a6be;
-    
-    &:hover {
-      color: #94a6be;
-      background-color: #eaeef6;
-    }
-  `}
-  
-  ${({ weekend }) =>
-    weekend &&
-    `
-    color: #94a6be;
-  `}
-  
-  ${({ current }) =>
-    current &&
-    `
-    font-weight: 700;
-  `}
-  
-  ${({ active }) =>
-    active &&
-    `
-    background-color: #94a6be;
-    color: #ffffff;
-  `}
+  &:hover {
+    background-color: ${({ $isActive }) => ($isActive ? "#94a6be" : "#eaeef6")};
+    color: ${({ $isActive }) => ($isActive ? "#ffffff" : "#94a6be")};
+  }
 `;
 
 export const CalendarNav = styled.div`
@@ -146,6 +114,6 @@ export const CalendarText = styled.p`
   line-height: 1;
 
   span {
-    color: #000000;
+    color: ${({ theme }) => theme.colors.text};
   }
 `;

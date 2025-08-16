@@ -20,15 +20,15 @@ const App = () => {
               <AppRoutes />
             </TaskProvider>
           </AuthProvider>
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            closeOnClick
+            pauseOnHover
+          />
         </AppWrapper>
       </CustomThemeProvider>
-      <ToastContainer
-        position="top"
-        autoClose={3000}
-        hideProgressBar={false}
-        closeOnClick
-        pauseOnHover
-      />
     </>
   );
 };

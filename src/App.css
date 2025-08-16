@@ -364,7 +364,7 @@ body {
   font-weight: 400;
   font-size: 14px;
   line-height: 1px;
-  color: #94a6be;
+  color: rgba(148, 166, 190, 1);
   letter-spacing: -0.14px;
 }
 .form-new__input::placeholder,
@@ -372,7 +372,7 @@ body {
   font-weight: 400;
   font-size: 14px;
   line-height: 1px;
-  color: #94a6be;
+  color: rgba(148, 166, 190, 1);
   letter-spacing: -0.14px;
 }
 .form-new__input {
@@ -638,14 +638,14 @@ body {
   font-weight: 400;
   font-size: 14px;
   line-height: 1px;
-  color: #94a6be;
+  color: rgba(148, 166, 190, 1);
   letter-spacing: -0.14px;
 }
 .form-browse__area::placeholder {
   font-weight: 400;
   font-size: 14px;
   line-height: 1px;
-  color: #94a6be;
+  color: rgba(148, 166, 190, 1);
   letter-spacing: -0.14px;
 }
 

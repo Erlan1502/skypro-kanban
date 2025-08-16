@@ -10,7 +10,7 @@ export const lightTheme = {
     textSecondary: '#94A6BE', 
     textLight: '#FFFFFF',
     error: 'rgb(248, 77, 77)', 
-
+    textPlaceholder: 'rgba(148, 166, 190, 1)',
 
     background: '#FFFFFF',
     backgroundSecondary: '#EAEEF6',
@@ -39,7 +39,7 @@ export const darkTheme = {
     textSecondary: '#94A6BE', 
     textLight: '#FFFFFF', 
     error: 'rgb(248, 77, 77)', 
-
+    textPlaceholder: 'rgba(148, 166, 190, 1)',
     background: 'rgba(32, 32, 44, 1)', 
     backgroundSecondary: 'rgba(21, 20, 25, 1)',
     backgroundForUser: 'rgba(32, 34, 41, 1)', 
