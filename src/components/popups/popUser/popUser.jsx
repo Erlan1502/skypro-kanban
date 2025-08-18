@@ -1,19 +1,40 @@
 import React from "react";
-import "./popUser.css";
+import { useNavigate } from "react-router-dom";
+import {
+  PopUserContainer,
+  Name,
+  Email,
+  ThemeContainer,
+  ThemeText,
+  Checkbox,
+  LogoutButton,
+} from "./popUser.styled.js";
+import { useTheme } from "../../../context/themeContext/themeProvider.jsx";
 
-const PopUser = () => {
+const PopUser = ({ $isVisible }) => {
+  const navigate = useNavigate();
+  const { themeName, toggleTheme } = useTheme();
+  const handleLogoutClick = (e) => {
+    e.preventDefault();
+    navigate("/exit");
+  };
+  const userData = JSON.parse(localStorage.getItem("userInfo")) || {};
+  const { name, login } = userData;
+
   return (
-    <div className="pop-user-set" id="user-set-target">
-      <p className="pop-user-set__name">Ivan Ivanov</p>
-      <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-      <div className="pop-user-set__theme">
-        <p>Темная тема</p>
-        <input type="checkbox" className="checkbox" name="checkbox" />
-      </div>
-      <button type="button" className="_hover03">
-        <a href="#popExit">Выйти</a>
-      </button>
-    </div>
+    <PopUserContainer $isVisible={$isVisible}>
+      <Name>{`${name}`}</Name>
+      <Email>{`${login}`}</Email>
+      <ThemeContainer>
+        <ThemeText>Темная тема</ThemeText>
+        <Checkbox
+          name="checkbox"
+          checked={themeName === 'dark'}
+          onChange={toggleTheme}
+        />
+      </ThemeContainer>
+      <LogoutButton onClick={handleLogoutClick}>Выйти</LogoutButton>
+    </PopUserContainer>
   );
 };
 

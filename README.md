@@ -10,3 +10,17 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Добавлен Toastify, там где это не отходит от макета
+
+## Добавлен ThemeProvider, для Мэйн, т.к. логика говорит о том что в логине и регистрации невозможно изменить тему.
+
+## Исправлен ряд ошибок со сьездом дат при создании нового задания
+
+## Добавлен styled.js
+
+## Добавлена интерактивная прогрузка вместо статического текста.
+
+## Убраны избыточные вызовы API для обновления, оптимизированы существующие функции.
+
+## Изменена 404 страница под стиль проекта

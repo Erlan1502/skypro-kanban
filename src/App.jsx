@@ -1,21 +1,36 @@
-import React from "react";
-import Header from "./components/header/header.jsx";
-import Main from "./components/main/main.jsx";
-import PopBrowse from "./components/popups/popBrowse/popBrowse.jsx";
-import PopNewCard from "./components/popups/popNewCard/popNewCard.jsx";
-import PopUser from "./components/popups/popUser/popUser.jsx";
-import "./App.css";
+import React from 'react';
+import GlobalStyles from './GlobalStyles.styled.js';
+import { AppWrapper } from './App.styled.js';
+import './App.css';
+import AppRoutes from './AppRoutes';
+import AuthProvider from './context/authContext/AuthProvider.jsx';
+import { TaskProvider } from './context/taskContext/TaskProvider.jsx';
+import { CustomThemeProvider } from './context/themeContext/themeProvider.jsx';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
-    <div className="wrapper">
-      <Header />
-      <Main />
-      <PopBrowse />
-      <PopNewCard />
-      <PopUser />
-    </div>
+    <>
+      <CustomThemeProvider>
+        <GlobalStyles />
+        <AppWrapper>
+          <AuthProvider>
+            <TaskProvider>
+              <AppRoutes />
+            </TaskProvider>
+          </AuthProvider>
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            closeOnClick
+            pauseOnHover
+          />
+        </AppWrapper>
+      </CustomThemeProvider>
+    </>
   );
 };
-// upd 18/03 -> for pull request
+
 export default App;

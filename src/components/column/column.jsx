@@ -1,39 +1,40 @@
-import React from "react";
-import { Card } from "../card/card.jsx";
-import { SColumn } from "./column.styled.js";
-import { cardList } from "../../data.js";
-import { useState, useEffect } from "react";
+import React from 'react';
+import { Card } from '../card/card.jsx';
+import LoadingCard from '../loading/LoadingCard.jsx';
+import {
+  SCards,
+  SColumnTitle,
+  SColumnTitleParagraph,
+} from './column.styled.js';
 
-const Column = ({ status }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const cardsWithoutStatus = cardList.filter((card) => card.status === status);
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, []);
+const Column = ({ status, isLoading, tasks }) => {
   return (
-    <SColumn className="main__column">
-      <div className="column__title">
+    <SColumnTitle>
+      <SColumnTitleParagraph>
         <p>{status}</p>
-      </div>
-      <div className="cards">
+      </SColumnTitleParagraph>
+      <SCards>
         {isLoading ? (
-          <div className="loading">Данные загружаются...</div>
+          <>
+            <LoadingCard />
+            <LoadingCard />
+            <LoadingCard />
+          </>
         ) : (
-          cardsWithoutStatus.map((card) => (
+          tasks.map((card) => (
             <Card
-              key={card.id}
-              id={card.id}
-              theme={card.theme}
+              key={card._id}
+              id={card._id}
+              theme={card.topic}
               date={card.date}
               status={card.status}
               title={card.title}
             />
           ))
         )}
-      </div>
-    </SColumn>
+      </SCards>
+    </SColumnTitle>
   );
 };
+
 export { Column };
